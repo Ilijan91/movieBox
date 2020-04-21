@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0dcbdc80776ca79d6311b8f92c5a4b5",
+    "content-hash": "6d5c854a35c9218dc6a0a9f2ff9d7c93",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -60,25 +60,26 @@
         },
         {
             "name": "brick/math",
-            "version": "0.8.14",
+            "version": "0.8.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brick/math.git",
-                "reference": "6f7a46b5c3d487b277f38fbd17df57d348cace8a"
+                "reference": "9b08d412b9da9455b210459ff71414de7e6241cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brick/math/zipball/6f7a46b5c3d487b277f38fbd17df57d348cace8a",
-                "reference": "6f7a46b5c3d487b277f38fbd17df57d348cace8a",
+                "url": "https://api.github.com/repos/brick/math/zipball/9b08d412b9da9455b210459ff71414de7e6241cd",
+                "reference": "9b08d412b9da9455b210459ff71414de7e6241cd",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "ext-json": "*",
+                "php": "^7.1|^8.0"
             },
             "require-dev": {
-                "php-coveralls/php-coveralls": "2.*",
-                "phpunit/phpunit": "7.*",
-                "vimeo/psalm": "3.*"
+                "php-coveralls/php-coveralls": "^2.2",
+                "phpunit/phpunit": "^7.5.15|^8.5",
+                "vimeo/psalm": "^3.5"
             },
             "type": "library",
             "autoload": {
@@ -101,7 +102,7 @@
                 "brick",
                 "math"
             ],
-            "time": "2020-02-17T13:57:43+00:00"
+            "time": "2020-04-15T15:59:35+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -135,6 +136,88 @@
             ],
             "description": "implementation of xdg base directory specification for php",
             "time": "2019-12-04T15:06:13+00:00"
+        },
+        {
+            "name": "doctrine/cache",
+            "version": "1.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/cache.git",
+                "reference": "382e7f4db9a12dc6c19431743a2b096041bcdd62"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/382e7f4db9a12dc6c19431743a2b096041bcdd62",
+                "reference": "382e7f4db9a12dc6c19431743a2b096041bcdd62",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~7.1"
+            },
+            "conflict": {
+                "doctrine/common": ">2.2,<2.4"
+            },
+            "require-dev": {
+                "alcaeus/mongo-php-adapter": "^1.1",
+                "doctrine/coding-standard": "^6.0",
+                "mongodb/mongodb": "^1.1",
+                "phpunit/phpunit": "^7.0",
+                "predis/predis": "~1.0"
+            },
+            "suggest": {
+                "alcaeus/mongo-php-adapter": "Required to use legacy MongoDB driver"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.9.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Common\\Cache\\": "lib/Doctrine/Common/Cache"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Johannes Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "PHP Doctrine Cache library is a popular cache implementation that supports many different drivers such as redis, memcache, apc, mongodb and others.",
+            "homepage": "https://www.doctrine-project.org/projects/cache.html",
+            "keywords": [
+                "abstraction",
+                "apcu",
+                "cache",
+                "caching",
+                "couchdb",
+                "memcached",
+                "php",
+                "redis",
+                "xcache"
+            ],
+            "time": "2019-11-29T15:36:20+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -501,23 +584,24 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.5.2",
+            "version": "6.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "43ece0e75098b7ecd8d13918293029e555a50f82"
+                "reference": "aab4ebd862aa7d04f01a4b51849d657db56d882e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/43ece0e75098b7ecd8d13918293029e555a50f82",
-                "reference": "43ece0e75098b7ecd8d13918293029e555a50f82",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/aab4ebd862aa7d04f01a4b51849d657db56d882e",
+                "reference": "aab4ebd862aa7d04f01a4b51849d657db56d882e",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "guzzlehttp/promises": "^1.0",
                 "guzzlehttp/psr7": "^1.6.1",
-                "php": ">=5.5"
+                "php": ">=5.5",
+                "symfony/polyfill-intl-idn": "^1.11"
             },
             "require-dev": {
                 "ext-curl": "*",
@@ -525,7 +609,6 @@
                 "psr/log": "^1.1"
             },
             "suggest": {
-                "ext-intl": "Required for Internationalized Domain Name (IDN) support",
                 "psr/log": "Required for using the Log middleware"
             },
             "type": "library",
@@ -564,7 +647,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2019-12-23T11:57:10+00:00"
+            "time": "2020-04-18T10:38:46+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -689,17 +772,92 @@
             "time": "2019-07-01T23:21:34+00:00"
         },
         {
-            "name": "laravel/framework",
-            "version": "v7.5.2",
+            "name": "kevinrob/guzzle-cache-middleware",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "3a3b3f7fea69813f5a03449c6314bfb42c3ccf78"
+                "url": "https://github.com/Kevinrob/guzzle-cache-middleware.git",
+                "reference": "6952064f7747756b0be7b4c234c0fd7535ea4c8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/3a3b3f7fea69813f5a03449c6314bfb42c3ccf78",
-                "reference": "3a3b3f7fea69813f5a03449c6314bfb42c3ccf78",
+                "url": "https://api.github.com/repos/Kevinrob/guzzle-cache-middleware/zipball/6952064f7747756b0be7b4c234c0fd7535ea4c8c",
+                "reference": "6952064f7747756b0be7b4c234c0fd7535ea4c8c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "cache/array-adapter": "^0.4",
+                "doctrine/cache": "^1.0",
+                "guzzlehttp/guzzle": "^6.0",
+                "illuminate/cache": "^5.0",
+                "league/flysystem": "^1.0",
+                "phpunit/phpunit": "^4.0 || ^5.0",
+                "psr/cache": "^1.0"
+            },
+            "suggest": {
+                "doctrine/cache": "This library have a lot of ready-to-use cache storage (to be use with Kevinrob\\GuzzleCache\\Storage\\DoctrineCacheStorage)",
+                "guzzlehttp/guzzle": "For using this library. It was created for Guzzle6. (but you can use it with any PSR-7 HTTP Client)",
+                "laravel/framework": "To be use with Kevinrob\\GuzzleCache\\Storage\\LaravelCacheStorage",
+                "league/flysystem": "To be use with Kevinrob\\GuzzleCache\\Storage\\FlysystemStorage",
+                "psr/cache": "To be use with Kevinrob\\GuzzleCache\\Storage\\Psr6CacheStorage"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kevinrob\\GuzzleCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Robatel",
+                    "email": "kevinrob2@gmail.com",
+                    "homepage": "https://github.com/Kevinrob"
+                }
+            ],
+            "description": "A HTTP/1.1 Cache for Guzzle 6. It's a simple Middleware to be added in the HandlerStack. (RFC 7234)",
+            "homepage": "https://github.com/Kevinrob/guzzle-cache-middleware",
+            "keywords": [
+                "Etag",
+                "Flysystem",
+                "Guzzle",
+                "cache",
+                "cache-control",
+                "doctrine",
+                "expiration",
+                "guzzle6",
+                "handler",
+                "http",
+                "http 1.1",
+                "middleware",
+                "performance",
+                "php",
+                "promise",
+                "psr6",
+                "psr7",
+                "rfc7234",
+                "validation"
+            ],
+            "time": "2017-08-17T12:23:43+00:00"
+        },
+        {
+            "name": "laravel/framework",
+            "version": "v7.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "695be25d84b5cedd0026c428d4e9697fe8cd06f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/695be25d84b5cedd0026c428d4e9697fe8cd06f9",
+                "reference": "695be25d84b5cedd0026c428d4e9697fe8cd06f9",
                 "shasum": ""
             },
             "require": {
@@ -837,7 +995,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-04-08T15:54:18+00:00"
+            "time": "2020-04-15T20:57:47+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1034,16 +1192,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.66",
+            "version": "1.0.67",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "021569195e15f8209b1c4bebb78bd66aa4f08c21"
+                "reference": "5b1f36c75c4bdde981294c2a0ebdb437ee6f275e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/021569195e15f8209b1c4bebb78bd66aa4f08c21",
-                "reference": "021569195e15f8209b1c4bebb78bd66aa4f08c21",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/5b1f36c75c4bdde981294c2a0ebdb437ee6f275e",
+                "reference": "5b1f36c75c4bdde981294c2a0ebdb437ee6f275e",
                 "shasum": ""
             },
             "require": {
@@ -1114,7 +1272,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2020-03-17T18:58:12+00:00"
+            "time": "2020-04-16T13:21:26+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1380,6 +1538,74 @@
                 "serialize"
             ],
             "time": "2019-11-29T22:36:02+00:00"
+        },
+        {
+            "name": "php-tmdb/api",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-tmdb/api.git",
+                "reference": "6ed18ca054ebe088d4806a78fa46824eca9f1226"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-tmdb/api/zipball/6ed18ca054ebe088d4806a78fa46824eca9f1226",
+                "reference": "6ed18ca054ebe088d4806a78fa46824eca9f1226",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/cache": "^1.6",
+                "ext-curl": "*",
+                "guzzlehttp/guzzle": "~6.0",
+                "kevinrob/guzzle-cache-middleware": "^1.2 || ^2.0",
+                "php": ">=7.1.3",
+                "psr/log": "~1.0",
+                "rtheunissen/guzzle-log-middleware": "^0.4.0",
+                "symfony/event-dispatcher": ">=4.4,<6",
+                "symfony/options-resolver": ">=4.4,<6"
+            },
+            "require-dev": {
+                "monolog/monolog": ">=1.11.0",
+                "phpunit/phpunit": "^5.0"
+            },
+            "suggest": {
+                "monolog/monolog": "Required if you want to make use of logging features."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Tmdb\\": "lib/Tmdb"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Roterman",
+                    "email": "michael@wtfz.net",
+                    "homepage": "http://wtfz.net"
+                }
+            ],
+            "description": "PHP wrapper for TMDB (TheMovieDatabase) API v3. Supports two types of approaches, one modelled with repositories, models and factories. And the other by simple array access to RAW data from The Movie Database.",
+            "homepage": "https://github.com/wtfzdotnet/php-tmdb-api",
+            "keywords": [
+                "api",
+                "movie",
+                "php",
+                "tmdb",
+                "tv",
+                "tv show",
+                "tvdb",
+                "wrapper"
+            ],
+            "time": "2020-03-23T16:08:49+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -1929,6 +2155,58 @@
                 "uuid"
             ],
             "time": "2020-03-29T20:13:32+00:00"
+        },
+        {
+            "name": "rtheunissen/guzzle-log-middleware",
+            "version": "v0.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rtheunissen/guzzle-log-middleware.git",
+                "reference": "6a15b7f71c6fc3f8456abeed530b2f12846f075f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rtheunissen/guzzle-log-middleware/zipball/6a15b7f71c6fc3f8456abeed530b2f12846f075f",
+                "reference": "6a15b7f71c6fc3f8456abeed530b2f12846f075f",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "php": ">=5.5",
+                "psr/log": "~1.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "~4.6"
+            },
+            "suggest": {
+                "monolog/monolog": "Recommended PSR-3 logger"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Concat\\Http\\Middleware\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rudi Theunissen",
+                    "email": "rudolf.theunissen@gmail.com"
+                }
+            ],
+            "description": "Guzzle middleware to log requests and responses",
+            "keywords": [
+                "Guzzle",
+                "http",
+                "log",
+                "middleware",
+                "psr7"
+            ],
+            "time": "2019-02-07T18:58:23+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2563,6 +2841,60 @@
             "keywords": [
                 "mime",
                 "mime-type"
+            ],
+            "time": "2020-03-27T16:56:45+00:00"
+        },
+        {
+            "name": "symfony/options-resolver",
+            "version": "v5.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/options-resolver.git",
+                "reference": "09dccfffd24b311df7f184aa80ee7b61ad61ed8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/09dccfffd24b311df7f184aa80ee7b61ad61ed8d",
+                "reference": "09dccfffd24b311df7f184aa80ee7b61ad61ed8d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\OptionsResolver\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony OptionsResolver Component",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "config",
+                "configuration",
+                "options"
             ],
             "time": "2020-03-27T16:56:45+00:00"
         },
@@ -5417,16 +5749,16 @@
         },
         {
             "name": "webmozart/assert",
-            "version": "1.7.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozart/assert.git",
-                "reference": "aed98a490f9a8f78468232db345ab9cf606cf598"
+                "reference": "ab2cb0b3b559010b75981b1bdce728da3ee90ad6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/aed98a490f9a8f78468232db345ab9cf606cf598",
-                "reference": "aed98a490f9a8f78468232db345ab9cf606cf598",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/ab2cb0b3b559010b75981b1bdce728da3ee90ad6",
+                "reference": "ab2cb0b3b559010b75981b1bdce728da3ee90ad6",
                 "shasum": ""
             },
             "require": {
@@ -5434,7 +5766,7 @@
                 "symfony/polyfill-ctype": "^1.8"
             },
             "conflict": {
-                "vimeo/psalm": "<3.6.0"
+                "vimeo/psalm": "<3.9.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8.36 || ^7.5.13"
@@ -5461,7 +5793,7 @@
                 "check",
                 "validate"
             ],
-            "time": "2020-02-14T12:15:55+00:00"
+            "time": "2020-04-18T12:12:48+00:00"
         }
     ],
     "aliases": [],
