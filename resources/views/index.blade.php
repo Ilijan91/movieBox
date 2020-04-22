@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        <livewire:search>
         <div class="popular-movies">
             <h2>Popular Movies</h2>
             <div class="row">
