@@ -18,4 +18,11 @@ class Movie extends Model
     {
         return $this->belongsToMany('App\Genre');
     }
+
+    // public function format(){
+    //     return [
+
+    //     ];
+    // }
+
 }

@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
+use App\Repositories\MoviesRepositoryInterface;
 
 class MoviesController extends Controller
 {
+    private $moviesRepository;
+
+    public function __construct(MoviesRepositoryInterface $moviesRepository){
+        $this->moviesRepository=$moviesRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,27 +19,15 @@ class MoviesController extends Controller
      */
     public function index()
     {
-        $popularMovies=Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/movie/popular')
-            ->json()['results'];
-            
-        foreach($popularMovies as $popularMovie){
-            dd($popularMovie);
+        $popularMovies= $this->moviesRepository->getMovies();
+      
+        if(empty($popularMovies[0])){
+            $popularMovies= $this->moviesRepository->saveMoviesAndGenres();
+            $popularMovies= $this->moviesRepository->getMovies();
         }
-        
-        $genresResults=Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/genre/movie/list')
-            ->json()['genres'];
-        $genres= collect($genresResults)->mapWithKeys(function ($genre){
-            return [$genre['id']=>$genre['name']];
-        });
-
-        $nowPlayingMovies = Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/movie/now_playing')
-            ->json()['results'];
-
-        //dump($nowPlayingMovies);
-        return view('index',compact('popularMovies','genres','nowPlayingMovies'));
+        $genres=$this->moviesRepository->getGenres();
+       
+        return view('index',compact('popularMovies','genres'));
     }
 
     /**
@@ -65,13 +57,11 @@ class MoviesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($movieId)
     {
-        $movie = Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/movie/'.$id.'?append_to_response=videos,images')
-            ->json();
-        //dd($movie);
-        return view('show',compact('movie'));
+        $movie = $this->moviesRepository->findMovieById($movieId);
+        $genres=$this->moviesRepository->getGenres();
+        return view('show',compact('movie','genres'));
     }
 
     /**

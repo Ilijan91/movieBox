@@ -20,6 +20,7 @@ class CreateMoviesTable extends Migration
             $table->integer('rating');
             $table->text('overview');
             $table->date('release_date');
+            $table->string('genre_id');
             $table->timestamps();
         });
     }
