@@ -14,15 +14,10 @@ class Movie extends Model
         return $this->belongsTo('App\Watchlist');
     }
 
-    public function genres()
+    public function moviegenres()
     {
-        return $this->belongsToMany('App\Genre');
+        return $this->belongsToMany('App\MovieGenre');
     }
 
-    // public function format(){
-    //     return [
-
-    //     ];
-    // }
 
 }

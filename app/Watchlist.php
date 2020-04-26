@@ -17,5 +17,9 @@ class Watchlist extends Model
     {
         return $this->hasMany('App\Movie');
     }
+    public function series()
+    {
+        return $this->hasMany('App\Series');
+    }
    
 }

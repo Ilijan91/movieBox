@@ -2,14 +2,15 @@
 
 namespace App\Repositories;
 
-use App\Genre;
 use App\Movie;
+use App\MovieGenre;
 use Illuminate\Support\Facades\Http;
+use App\Repositories\MoviesTvRepositoryInterface;
 
 
-class MoviesRepository implements MoviesRepositoryInterface
+class MoviesRepository implements MoviesTvRepositoryInterface
 {
-    public function getMoviesResults(){
+    public function getGeneralResults(){
         return Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/movie/popular')
             ->json()['results'];
@@ -21,9 +22,9 @@ class MoviesRepository implements MoviesRepositoryInterface
             ->json()['genres'];
     }
 
-    public function saveMoviesAndGenres(){
+    public function save(){
 
-        $movies=$this->getMoviesResults();
+        $movies=$this->getGeneralResults();
       
         foreach($movies as $movie){
              Movie::create([
@@ -37,24 +38,24 @@ class MoviesRepository implements MoviesRepositoryInterface
         } 
         $genres=$this->getGenresResults();
         foreach($genres as $genre){
-            Genre::create([
+            MovieGenre::create([
                 'id'=>$genre['id'],
                 'name'=>$genre['name'],
             ]);
         } 
     }
 
-    public function getMovies(){
+    public function getGeneral(){
         return Movie::select()->get();
     }
 
     
     public function getGenres(){
-        return Genre::select()->get();
+        return MovieGenre::select()->get();
     }
 
-    public function findMovieById($movieId){
-        return Movie::find($movieId);
+    public function findById($id){
+        return Movie::find($id);
     }
 
     

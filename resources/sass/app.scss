@@ -1,8 +1,27 @@
-// Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
 @import 'variables';
 
+//import pages
+@import 'details.scss';
+@import 'home.scss';
+@import 'login.scss';
+
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/bootstrap';
+
+*{
+	margin: 0;
+	padding: 0;
+}
+html,body{
+	font-size: 14px;
+	color: #333;
+	// height: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar{
+    background: rgba(51, 255, 0, 0.13);
+}
