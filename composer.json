@@ -14,7 +14,9 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.0"
+        "laravel/ui": "^2.0",
+        "livewire/livewire": "^1.0",
+        "php-tmdb/api": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
@@ -26,7 +28,8 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "php-tmdb/laravel": "1.0"
     },
     "extra": {
         "laravel": {
