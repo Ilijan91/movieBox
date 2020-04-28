@@ -4,30 +4,37 @@ namespace App\Repositories;
 
 use App\Movie;
 use App\MovieGenre;
-use Illuminate\Support\Facades\Http;
-use App\Repositories\MoviesTvRepositoryInterface;
+
+// use Illuminate\Database\Eloquent\Model;
+use App\Repositories\MoviesRepositoryInterface;
 
 
-class MoviesRepository implements MoviesTvRepositoryInterface
+class MoviesRepository implements MoviesRepositoryInterface
 {
-    public function getGeneralResults(){
-        return Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/movie/popular')
-            ->json()['results'];
+    // protected $movie;
+    
+    
+    // public function __construct(Model $movie)
+    // {
+    //     $this->movie = $movie;
+    // }
+    
+    public function getMovies(){
+        return Movie::select()->get();
+    }
+     
+    public function getGenres(){
+        return MovieGenre::select()->get();
     }
 
-    public function getGenresResults(){
-        return Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/genre/movie/list')
-            ->json()['genres'];
+    public function findMovie($id){
+        return Movie::find($id);
     }
 
-    public function save(){
+    public function save($movies ,$genres){
 
-        $movies=$this->getGeneralResults();
-      
         foreach($movies as $movie){
-             Movie::create([
+            Movie::create([
                 'title'=> $movie['title'],
                 'poster'=> $movie['poster_path'],
                 'rating'=> $movie['vote_average'],
@@ -36,7 +43,7 @@ class MoviesRepository implements MoviesTvRepositoryInterface
                 'genre_id'=> implode(',',$movie['genre_ids']),
             ]);
         } 
-        $genres=$this->getGenresResults();
+       
         foreach($genres as $genre){
             MovieGenre::create([
                 'id'=>$genre['id'],
@@ -45,18 +52,10 @@ class MoviesRepository implements MoviesTvRepositoryInterface
         } 
     }
 
-    public function getGeneral(){
-        return Movie::select()->get();
-    }
-
     
-    public function getGenres(){
-        return MovieGenre::select()->get();
-    }
 
-    public function findById($id){
-        return Movie::find($id);
-    }
+   
+
 
     
 

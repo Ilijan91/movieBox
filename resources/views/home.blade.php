@@ -87,7 +87,7 @@
           </div>
           @endforeach
         </div>
-
+{{-- 
         <div class="movie-trailer-grid">
           @foreach ($tvshows as $tvshow)
           <div class="trailer1">
@@ -110,7 +110,7 @@
           @endforeach
         </div>
         <a href="#" class="viewall">View All</a>
-      </div>
+      </div> --}}
 
       <div class="movieposter">
         <h3>Must Watch</h3>

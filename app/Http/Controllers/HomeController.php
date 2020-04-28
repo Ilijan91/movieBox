@@ -2,27 +2,19 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Repositories\TvRepository;
-use Illuminate\Support\Facades\Route;
-use App\Repositories\MoviesRepository;
-
+use App\Services\MovieService;
 
 class HomeController extends Controller
 {
+    protected $movieService;
 
-    private $moviesRepository;
-    private $tvRepository;
- 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(MoviesRepository $moviesRepository,TvRepository $tvRepository){
-        
-        $this->moviesRepository=$moviesRepository;
-        $this->tvRepository=$tvRepository;
+    public function __construct(MovieService $movieService){
+        $this->movieService = $movieService;
     }
 
       /**
@@ -32,20 +24,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $movies= $this->moviesRepository->getGeneral();
-        $tvshows= $this->tvRepository->getGeneral();
+        $movies=$this->movieService->getPopularMovies();
+        $moviesgenres= $this->movieService->getMovieGenres();
        
-        if(empty($movies[0]) && empty($tvshows[0])){
-            $movies= $this->moviesRepository->save();
-            $tvshows= $this->tvRepository->save();
-            $movies= $this->moviesRepository->getGeneral();
-            $tvshows= $this->tvRepository->getGeneral();
-        }
+        if(empty($movies->first()) && empty($moviesgenres->first())){
+            $this->movieService->saveMovies();
 
-        $tvgenres=$this->tvRepository->getGenres();
-        $moviesgenres=$this->moviesRepository->getGenres();
-      
-        return view('home',compact('movies','tvshows','tvgenres','moviesgenres'));
+            $movies=$this->movieService->getPopularMovies();
+            $moviesgenres= $this->movieService->getMovieGenres();
+        }
+        return view('home',compact('movies','moviesgenres'));
     }
 
     /**
@@ -54,15 +42,11 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showMovie($id)
     {
-        if(Route::current()->getName()== "series.show"){
-            $program = $this->tvRepository->findById($id);
-            $genres=$this->tvRepository->getGenres();
-        }else{
-            $program = $this->moviesRepository->findById($id);
-            $genres=$this->moviesRepository->getGenres();
-        }
-        return view('details',compact('program','genres'));
+        $movie=$this->movieService->getMovie($id);
+        $genres=$this->movieService->getMovieGenres();
+
+        return view('details',compact('movie','genres'));
     }
 }

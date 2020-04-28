@@ -19,16 +19,16 @@
   
         <div class="main-wrapper">
           
-          <a href="#"> <img src="{{'https://image.tmdb.org/t/p/w200/'. $program->poster}}" alt="poster"></a>
+          <a href="#"> <img src="{{'https://image.tmdb.org/t/p/w200/'. $movie->poster}}" alt="poster"></a>
           <div class="cover-img"></div>
               
           <div class="hero">
                   
             <div class="details">
             
-              <div class="title1">{{$program->title}} <span>PG-13</span></div>
+              <div class="title1">{{$movie->title}} <span>PG-13</span></div>
       
-              <div class="title2">The Battle of the Five Armies</div>    
+              <div class="title2"></div>    
               
               <fieldset class="rating">
                 <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
@@ -52,7 +52,7 @@
           <div class="description">
             
             <div class="column1">
-              @foreach (explode(',',$program->genre_id) as $genre )
+              @foreach (explode(',',$movie->genre_id) as $genre )
                 @foreach ($genres as $g)
                   @if($g->id== $genre)
                    <span class="tag"> {{$g->name}}</span>
@@ -63,7 +63,7 @@
             
             <div class="column2">
               
-            <p>{{$program->overview}}</p>
+              <p>{{$movie->overview}}</p>
               
             </div> 
           </div> 

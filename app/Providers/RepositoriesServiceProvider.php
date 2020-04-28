@@ -3,9 +3,9 @@
 namespace App\Providers;
 
 use App\Repositories\MoviesRepository;
-use App\Repositories\MoviesTvRepositoryInterface;
-use App\Repositories\TvRepository;
+
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\MoviesRepositoryInterface;
 
 class RepositoriesServiceProvider extends ServiceProvider
 {
@@ -16,8 +16,8 @@ class RepositoriesServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(MoviesTvRepositoryInterface::class, MoviesRepository::class);
-        $this->app->bind(MoviesTvRepositoryInterface::class, TvRepository::class);
+        $this->app->bind(MoviesRepositoryInterface::class, MoviesRepository::class);
+       
     }
 
     /**
