@@ -30,7 +30,7 @@ class HomeController extends Controller
         if(empty($movies->first()) && empty($moviesgenres->first())){
             $this->movieService->saveMovies();
 
-            $movies=$this->movieService->getPopularMovies();
+            $movies=$this->movieService->getPopularMovies(); 
             $moviesgenres= $this->movieService->getMovieGenres();
         }
         return view('home',compact('movies','moviesgenres'));
