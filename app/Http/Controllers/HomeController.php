@@ -52,8 +52,9 @@ class HomeController extends Controller
         if($movie== null){
             $movie=$this->movieService->findMovie($id);
         }
-        $moviesgenres=$this->genreService->getGenres(); 
-        return view('details',compact('movie','moviesgenres'));
+        $moviesgenres=$this->genreService->getGenres();
+        $videos=$this->movieService->findVideo($id);
+        return view('details',compact('movie','moviesgenres','videos'));
     }
 
     public function showTopRatedMovies()

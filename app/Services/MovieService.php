@@ -30,13 +30,16 @@ class MovieService
 
     public function findMovie($id){
         $movie=$this->fatchMovieById($id);
-
+        
         $object = new stdClass();
             foreach ($movie as $key => $value)
             {
                 $object->$key = $value;
             }
         return $object;
+    }
+    public function findVideo($id){
+        return $this->fatchMovieVideo($id);
     }
     
     public function getMovie($id){
@@ -90,7 +93,11 @@ class MovieService
             ->json();
     }
     
-    
+    private function fatchMovieVideo($id){
+        return Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/movie/' . $id . '/videos')
+            ->json()['results'];
+    }
 
    
 

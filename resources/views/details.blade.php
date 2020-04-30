@@ -50,7 +50,10 @@
           </div> 
           
           <div class="description">
-            <div class="column1">
+            @if(count($videos)>0)
+              <button disabled="primary"><a href="https://www.youtube.com/watch?v={{$videos[0]['key']}}">Play Video</a></button>
+            @endif
+              <div class="column1">
               @if($movie->genres != 0) 
                 @foreach ($movie->genres as $genre )
                   @foreach ($moviesgenres as $g)
