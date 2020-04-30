@@ -4,16 +4,15 @@ namespace App\Services;
 
 use App\Repositories\MoviesRepositoryInterface;
 use Illuminate\Support\Facades\Http;
+use stdClass;
 
 class MovieService
 {
     protected $moviesRepository;
 
-
     public function __construct(MoviesRepositoryInterface $moviesRepository)
     {
         $this->moviesRepository = $moviesRepository;
-    
     }
 
     public function getPopularMovies(){
@@ -28,8 +27,18 @@ class MovieService
     public function getUpcomingMovies(){
         return $this->moviesRepository->getUpcoming();
     }
-    
 
+    public function findMovie($id){
+        $movie=$this->fatchMovieById($id);
+
+        $object = new stdClass();
+            foreach ($movie as $key => $value)
+            {
+                $object->$key = $value;
+            }
+        return $object;
+    }
+    
     public function getMovie($id){
         return $this->moviesRepository->find($id);
     }
@@ -73,6 +82,12 @@ class MovieService
         return Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/movie/now_playing')
             ->json()['results'];
+    }
+
+    private function fatchMovieById($id){
+        return Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/movie/'. $id)
+            ->json();
     }
     
     

@@ -50,8 +50,9 @@
             </div>
           </div>
         </div>
+        
       </div>
-      
+     
       <div class="movieposter">
         <div class="movie-categorisation">
           <a href="{{route('movies.index')}}" class="btn-movie-filter btn-rated">Now Playing</a>
@@ -71,7 +72,7 @@
           @foreach ($movies as $movie)
           <div class="trailer1">
             <a href="{{ route('movies.showMovie', $movie->id) }}">{{ $movie->title }}</a>
-              <img src="{{'https://image.tmdb.org/t/p/original'. $movie->poster}}" alt="poster">
+              <img src="{{'https://image.tmdb.org/t/p/original'. $movie->poster_path}}" alt="poster">
             </a>
             <div>
               <span class="ml-1">{{ $movie->rating }}</span>

@@ -1,22 +1,22 @@
 <div class="relative md:mt-0">
-    <input wire:model="search" type="text" placeholder="Search...">
+    <input wire:model="search" name="search" type="text" placeholder="Search...">
     @if(strlen($search) >= 2)
         <div class="absolute">
             @if ($searchResult->count()>0)
             <ul>
-                    @foreach ($searchResult as $result)
-                        <li>
-                            <a href="{{route('movies.showMovie', $result['id'])}}">
-                                @if($result['poster_path'])
-                                    <img src="https://image.tmdb.org/t/p/w92/{{$result['poster_path']}}" alt="poster">
-                                @else
+                @foreach ($searchResult as $result)
+                    <li>
+                        <a href="{{route('movies.showMovie', $result['id'])}}">
+                            @if($result['poster_path'])
+                                <img src="https://image.tmdb.org/t/p/w92/{{$result['poster_path']}}" alt="poster">
+                            @else
                                 <img src="https://via.placeholder.com/92x92" alt="poster">
-                                @endif
+                            @endif
                                 <span>{{$result['title']}}</span>
-                            </a>
-                        </li>
-                    @endforeach
-                </ul> 
+                        </a>
+                    </li>
+                @endforeach
+            </ul> 
             @else 
                 <ul>
                     <li>No results for "{{$search}}"</li>

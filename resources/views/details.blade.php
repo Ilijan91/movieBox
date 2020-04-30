@@ -19,7 +19,7 @@
   
         <div class="main-wrapper">
           
-          <a href="#"> <img src="{{'https://image.tmdb.org/t/p/w200/'. $movie->poster}}" alt="poster"></a>
+          <a href="#"> <img src="{{'https://image.tmdb.org/t/p/w200/'. $movie->poster_path}}" alt="poster"></a>
           <div class="cover-img"></div>
               
           <div class="hero">
@@ -50,15 +50,24 @@
           </div> 
           
           <div class="description">
-            
             <div class="column1">
-              @foreach (explode(',',$movie->genre_id) as $genre )
-                @foreach ($moviesgenres as $g)
-                  @if($g->id== $genre)
-                   <span class="tag"> {{$g->name}}</span>
-                  @endif
+              @if($movie->genres != 0) 
+                @foreach ($movie->genres as $genre )
+                  @foreach ($moviesgenres as $g)
+                    @if($g->id == $genre['id'])
+                    <span class="tag"> {{$g->name}}</span>
+                    @endif
+                  @endforeach
                 @endforeach
-             @endforeach
+              @else 
+                @foreach (explode(',',$movie->genre_id) as $genre )
+                  @foreach ($moviesgenres as $g)
+                    @if($g->id== $genre)
+                    <span class="tag"> {{$g->name}}</span>
+                    @endif
+                  @endforeach
+                @endforeach
+              @endif
             </div> 
             
             <div class="column2">

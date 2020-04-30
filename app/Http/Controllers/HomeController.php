@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\GenreService;
 use App\Services\MovieService;
 
+
 class HomeController extends Controller
 {
     protected $movieService;
@@ -47,8 +48,10 @@ class HomeController extends Controller
      */
     public function showMovie($id)
     {
-
         $movie=$this->movieService->getMovie($id);
+        if($movie== null){
+            $movie=$this->movieService->findMovie($id);
+        }
         $moviesgenres=$this->genreService->getGenres(); 
         return view('details',compact('movie','moviesgenres'));
     }

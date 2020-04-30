@@ -9,7 +9,6 @@ class GenreService {
 
     protected $genreRepository;
 
-
     public function __construct(GenreRepositoryInterface $genreRepository)
     {
         $this->genreRepository = $genreRepository;
@@ -23,9 +22,6 @@ class GenreService {
     public function getGenres(){
         return $this->genreRepository->all();
     }
-
-
-
 
     private function fatchMovieGenres(){
         return Http::withToken(config('services.tmdb.token'))

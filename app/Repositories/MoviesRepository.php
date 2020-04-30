@@ -49,7 +49,7 @@ class MoviesRepository implements MoviesRepositoryInterface
                 Movie::create([
                     'id'=>$movie['id'],
                     'title'=> $movie['title'],
-                    'poster'=> $movie['poster_path'],
+                    'poster_path'=> $movie['poster_path'],
                     'rating'=> $movie['vote_average'],
                     'overview'=> $movie['overview'],
                     'release_date'=> $movie['release_date'],
