@@ -17,23 +17,45 @@ class MovieService
     }
 
     public function getPopularMovies(){
-        return $this->moviesRepository->getMovies();
+        return $this->moviesRepository->getPopular();
     }
+    public function getTopRatedMovies(){
+        return $this->moviesRepository->getTopRated();
+    }
+    public function getNowPlayingMovies(){
+        return $this->moviesRepository->getNowPlaying();
+    }
+    public function getUpcomingMovies(){
+        return $this->moviesRepository->getUpcoming();
+    }
+    
 
-    public function getMovieGenres(){
-        return $this->moviesRepository->getGenres();
-    }
     public function getMovie($id){
-        return $this->moviesRepository->findMovie($id);
+        return $this->moviesRepository->find($id);
     }
 
-    public function saveMovies(){
-        $movies =  $this->fatchPopularMovies();
-        $genres =$this->fatchMovieGenres();
+    public function saveMovies(){ 
+
+        $popular =  $this->fatchPopularMovies();
+        $popularFlag= 'is_popular';
+        $topRated =  $this->fatchTopRatedMovies();
+        $topRatedFlag= 'is_top_rated';
+        $nowPlaying =  $this->fatchNowPlayingMovies();
+        $nowPlayingFlag= 'is_now_playing';
+        $upcoming =  $this->fatchUpcomingMovies();
+        $upcomingFlag= 'is_upcoming';
         
-        return $this->moviesRepository->save($movies, $genres);
+        $this->moviesRepository->save($popular ,$popularFlag);
+        $this->moviesRepository->save($topRated ,$topRatedFlag);
+        $this->moviesRepository->save($nowPlaying ,$nowPlayingFlag);
+        $this->moviesRepository->save($upcoming ,$upcomingFlag);
     }
 
+    private function fatchTopRatedMovies(){
+        return Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/movie/top_rated')
+            ->json()['results'];
+    }
 
     private function fatchPopularMovies(){
         return Http::withToken(config('services.tmdb.token'))
@@ -41,13 +63,21 @@ class MovieService
             ->json()['results'];
     }
 
-    private function fatchMovieGenres(){
+    private function fatchUpcomingMovies(){
         return Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/genre/movie/list')
-            ->json()['genres'];
+            ->get('https://api.themoviedb.org/3/movie/upcoming')
+            ->json()['results'];
     }
 
+    private function fatchNowPlayingMovies(){
+        return Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/movie/now_playing')
+            ->json()['results'];
+    }
+    
+    
 
+   
 
 
 

@@ -53,7 +53,7 @@
             
             <div class="column1">
               @foreach (explode(',',$movie->genre_id) as $genre )
-                @foreach ($genres as $g)
+                @foreach ($moviesgenres as $g)
                   @if($g->id== $genre)
                    <span class="tag"> {{$g->name}}</span>
                   @endif

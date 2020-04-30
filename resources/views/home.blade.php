@@ -54,12 +54,13 @@
       
       <div class="movieposter">
         <div class="movie-categorisation">
-          <button class="btn-movie-filter btn-trending">Trending</button>
-          <button class="btn-movie-filter btn-rated">Top Rated</button>
-          <button class="btn-movie-filter btn-arrivals">New Arrivals</button>
-		  <button class="btn-movie-filter btn-genre">Genre</button>
-		  <span class="icon-view icon-grid"><i class="fas fa-th-large"></i></span>
-		  <span class="icon-view icon-list"><i class="fas fa-stream"></i></span>
+          <a href="{{route('movies.index')}}" class="btn-movie-filter btn-rated">Now Playing</a>
+          <a href="{{route('movies.showTopRatedMovies')}}" class="btn-movie-filter btn-rated">Top Rated</a>
+          <a href="{{route('movies.showUpcomingMovies')}}" class="btn-movie-filter btn-rated">Upcoming</a>
+          <a href="{{route('movies.showPopularMovies')}}" class="btn-movie-filter btn-rated">Popular</a>
+          
+          <span class="icon-view icon-grid"><i class="fas fa-th-large"></i></span>
+          <span class="icon-view icon-list"><i class="fas fa-stream"></i></span>
           <div class="grid-and-list-view">
 		
 		  </div>
@@ -69,7 +70,7 @@
         <div class="movie-trailer-grid">
           @foreach ($movies as $movie)
           <div class="trailer1">
-            <a href="{{ route('movies.show', $movie->id) }}">{{ $movie->title }}</a>
+            <a href="{{ route('movies.showMovie', $movie->id) }}">{{ $movie->title }}</a>
               <img src="{{'https://image.tmdb.org/t/p/original'. $movie->poster}}" alt="poster">
             </a>
             <div>
@@ -87,30 +88,6 @@
           </div>
           @endforeach
         </div>
-{{-- 
-        <div class="movie-trailer-grid">
-          @foreach ($tvshows as $tvshow)
-          <div class="trailer1">
-            <a href="{{ route('series.show', $tvshow->id) }}">{{ $tvshow->title }}</a>
-              <img src="{{'https://image.tmdb.org/t/p/original'. $tvshow->poster}}" alt="poster">
-            </a>
-            <div>
-              <span class="ml-1">{{ $tvshow->rating }}</span>
-              <span class="mx-2">|</span>
-              <span>{{\Carbon\Carbon::parse($tvshow->release_date)->format('d M, Y')  }}</span>
-          </div>
-          @foreach (explode(',',$tvshow->genre_id) as $genre )
-            @foreach ($tvgenres as $g)
-              @if($g->id== $genre)
-                {{$g->name}}|
-              @endif
-            @endforeach
-          @endforeach
-          </div>
-          @endforeach
-        </div>
-        <a href="#" class="viewall">View All</a>
-      </div> --}}
 
       <div class="movieposter">
         <h3>Must Watch</h3>

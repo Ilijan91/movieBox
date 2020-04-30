@@ -13,10 +13,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/','HomeController@index')->name('movies.index');
-Route::get('/home','HomeController@index')->name('movies.index');
-Route::get('/movies/{id}','HomeController@showMovie')->name('movies.show');
-
 Auth::routes();
+Route::get('/','HomeController@index')->name('movies.index');
+Route::get('/movies/{id}','HomeController@showMovie')->name('movies.showMovie');
+
+Route::get('/home','HomeController@index')->name('movies.index');
+Route::get('/toprated','HomeController@showTopRatedMovies')->name('movies.showTopRatedMovies');
+Route::get('/upcoming','HomeController@showUpcomingMovies')->name('movies.showUpcomingMovies');
+Route::get('/popular','HomeController@showPopularMovies')->name('movies.showPopularMovies');
+
+
 

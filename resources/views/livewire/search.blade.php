@@ -6,7 +6,7 @@
             <ul>
                     @foreach ($searchResult as $result)
                         <li>
-                            <a href="{{route('movies.show', $result['id'])}}">
+                            <a href="{{route('movies.showMovie', $result['id'])}}">
                                 @if($result['poster_path'])
                                     <img src="https://image.tmdb.org/t/p/w92/{{$result['poster_path']}}" alt="poster">
                                 @else
