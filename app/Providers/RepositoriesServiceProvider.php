@@ -8,6 +8,8 @@ use App\Repositories\MoviesRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\GenreRepositoryInterface;
 use App\Repositories\MoviesRepositoryInterface;
+use App\Repositories\WatchlistRepository;
+use App\Repositories\WatchlistRepositoryInterface;
 
 class RepositoriesServiceProvider extends ServiceProvider
 {
@@ -20,6 +22,7 @@ class RepositoriesServiceProvider extends ServiceProvider
     {
         $this->app->bind(MoviesRepositoryInterface::class, MoviesRepository::class);
         $this->app->bind(GenreRepositoryInterface::class, GenreRepository::class);
+        $this->app->bind(WatchlistRepositoryInterface::class, WatchlistRepository::class);
        
     }
 

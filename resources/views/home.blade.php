@@ -22,17 +22,22 @@
     
 
         <div class="">
-          <h1 class="header-line">WRATH OF THE TITANS</h1>
+          <h1 class="header-line">{{$popularMovie[0]->title}}</h1>
           <div class="filter-navbar">
-            <a href="#">Fantasy</a>
-            <a href="#">Animation</a>
-            <a href="#">Family</a>
-            <a href="#">Duration</a>
+            @foreach (explode(',',$popularMovie[0]->genre_id) as $genre )
+            @foreach ($moviesgenres as $g)
+              @if($g->id== $genre)
+              <a href="#">{{$g->name}}</a>
+              @endif
+            @endforeach
+          @endforeach
           </div>
           <div class="button-navbar">
-            <button class="btn-watch-movie">WATCH MOVIE</button>
-            <button class="btn-view-info">VIEW INFO</button>
-            <button class="btn-add-to-wishlist">+ ADD TO WISHLIST</button>
+            @if(count($videos)>0)
+              <button class="btn-watch-movie"><a href="https://www.youtube.com/watch?v={{$videos[0]['key']}}">WATCH MOVIE</a></button>
+            @endif
+            <button class="btn-view-info"><a href="{{ route('movies.showMovie', $popularMovie[0]->id) }}">VIEW INFO</a></button>
+            <button class="btn-add-to-wishlist"><a href="{{'addmovie/'. $popularMovie[0]->id}}">+ ADD TO WISHLIST</a></button>
           </div>
           <div class="column">
             <div class="rating-card">
@@ -51,6 +56,8 @@
           </div>
         </div>
         
+
+
       </div>
      
       <div class="movieposter">
@@ -86,8 +93,13 @@
               @endif
             @endforeach
           @endforeach
+          @if(auth()->user())
+            <button disabled="primary"><a href="{{'addmovie/'. $movie->id}}">Add to watchlist</a></button>
+          @endif
           </div>
+          
           @endforeach
+          
         </div>
 
       <div class="movieposter">

@@ -10,22 +10,19 @@ class HomeController extends Controller
 {
     protected $movieService;
     protected $genreService;
-
+    
     /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct(MovieService $movieService, GenreService $genreService){
+        $this->middleware('auth', ['except' => ['index', 'showMovie','showTopRatedMovies','showUpcomingMovies','showPopularMovies']]);
         $this->movieService = $movieService;
         $this->genreService = $genreService;
+  
     }
 
-      /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $movies=$this->movieService->getNowPlayingMovies(); 
@@ -36,18 +33,15 @@ class HomeController extends Controller
             $movies=$this->movieService->getNowPlayingMovies();
             $moviesgenres=$this->genreService->getGenres(); 
         }
-        
-        return view('home',compact('movies','moviesgenres'));
+        $popularMovie=$this->movieService->mostPopularMovie();
+        $videos=$this->movieService->findVideo($popularMovie[0]->id);
+        return view('home',compact('movies','moviesgenres','popularMovie','videos'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function showMovie($id)
     {
+        // Search first movie in database, if not found , search in TMDB API
         $movie=$this->movieService->getMovie($id);
         if($movie== null){
             $movie=$this->movieService->findMovie($id);
@@ -61,19 +55,29 @@ class HomeController extends Controller
     {
         $movies=$this->movieService->getTopRatedMovies(); 
         $moviesgenres=$this->genreService->getGenres();
-        return view('home',compact('movies','moviesgenres'));
+        $popularMovie=$this->movieService->mostPopularMovie();
+        $videos=$this->movieService->findVideo($popularMovie[0]->id);
+        return view('home',compact('movies','moviesgenres','popularMovie','videos'));
     }
 
     public function showUpcomingMovies()
     {
         $movies=$this->movieService->getUpcomingMovies(); 
         $moviesgenres=$this->genreService->getGenres();
-        return view('home',compact('movies','moviesgenres'));
+        $popularMovie=$this->movieService->mostPopularMovie();
+        $videos=$this->movieService->findVideo($popularMovie[0]->id);
+        return view('home',compact('movies','moviesgenres','popularMovie','videos'));
     }
     public function showPopularMovies()
     {
         $movies=$this->movieService->getPopularMovies(); 
         $moviesgenres=$this->genreService->getGenres();
-        return view('home',compact('movies','moviesgenres'));
+        $popularMovie=$this->movieService->mostPopularMovie();
+        $videos=$this->movieService->findVideo($popularMovie[0]->id);
+        return view('home',compact('movies','moviesgenres','popularMovie','videos'));
     }
+    
+    
+
+   
 }

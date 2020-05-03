@@ -9,10 +9,12 @@ use stdClass;
 class MovieService
 {
     protected $moviesRepository;
+    protected $watchlistService;
 
-    public function __construct(MoviesRepositoryInterface $moviesRepository)
+    public function __construct(MoviesRepositoryInterface $moviesRepository,WatchlistService $watchlistService)
     {
         $this->moviesRepository = $moviesRepository;
+        $this->watchlistService = $watchlistService;
     }
 
     public function getPopularMovies(){
@@ -63,6 +65,10 @@ class MovieService
         $this->moviesRepository->save($upcoming ,$upcomingFlag);
     }
 
+    public function mostPopularMovie(){
+        $movie_id=$this->watchlistService->getPopularMovie();
+        return $this->moviesRepository->find($movie_id);
+    }
     private function fatchTopRatedMovies(){
         return Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/movie/top_rated')
