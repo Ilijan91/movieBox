@@ -19,21 +19,15 @@
   <body>
     <div class="wrapper">
       <div class="bgslide">
-    
+        
 
         <div class="">
-          @if($popularMovie==null)
-          <h1>No popular Movie  </h1>
-          @else
+          @if($popularMovie != null)
           <h1 class="header-line">{{$popularMovie[0]->title}}</h1>
           <div class="filter-navbar">
-            @foreach (explode(',',$popularMovie[0]->genre_id) as $genre )
-            @foreach ($moviesgenres as $g)
-              @if($g->id== $genre)
-              <a href="#">{{$g->name}}</a>
-              @endif
+            @foreach ($popularMovieGenres[$popularMovie[0]->id] as $genre)
+              <a href="#">{{$genre}}</a>
             @endforeach
-          @endforeach
           </div>
           <div class="button-navbar">
             @if(count($videos)>0)
@@ -58,7 +52,9 @@
             </div>
           </div>
         </div>
-        @endif
+          @endif
+          
+       
 
 
       </div>

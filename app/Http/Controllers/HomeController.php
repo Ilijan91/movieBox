@@ -35,14 +35,19 @@ class HomeController extends Controller
             $moviesgenres=$this->movieService->getMoviesGenres($movies);
         }
         $popularMovie=$this->movieService->mostPopularMovie();
+    
         if($popularMovie->count()!= 0){
+            
             $videos=$this->movieService->findVideo($popularMovie[0]->id);
+            $popularMovieGenres=$this->movieService->getMovieGenres($popularMovie[0]);
+            
         }else{
             $popularMovie= null;
             $videos= null;
+            $popularMovieGenres=null;
         }
         
-        return view('home',compact('movies','moviesgenres','popularMovie','videos'));
+        return view('home',compact('movies','moviesgenres','popularMovieGenres','popularMovie','videos'));
     }
 
    
