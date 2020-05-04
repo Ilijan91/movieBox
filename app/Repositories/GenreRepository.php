@@ -21,4 +21,5 @@ class GenreRepository implements GenreRepositoryInterface
     public function all(){
         return MovieGenre::all();
     }
+    
 }

@@ -22,6 +22,9 @@
     
 
         <div class="">
+          @if($popularMovie==null)
+          <h1>No popular Movie  </h1>
+          @else
           <h1 class="header-line">{{$popularMovie[0]->title}}</h1>
           <div class="filter-navbar">
             @foreach (explode(',',$popularMovie[0]->genre_id) as $genre )
@@ -55,7 +58,7 @@
             </div>
           </div>
         </div>
-        
+        @endif
 
 
       </div>
@@ -86,13 +89,13 @@
               <span class="mx-2">|</span>
               <span>{{\Carbon\Carbon::parse($movie->release_date)->format('d M, Y')  }}</span>
           </div>
-          @foreach (explode(',',$movie->genre_id) as $genre )
-            @foreach ($moviesgenres as $g)
-              @if($g->id== $genre)
-                {{$g->name}}|
-              @endif
-            @endforeach
+         
+          @foreach (array_slice($moviesgenres[$movie->id], 0,3) as $genre)
+              {{$genre}}
           @endforeach
+           
+        
+          
           @if(auth()->user())
             <button disabled="primary"><a href="{{'addmovie/'. $movie->id}}">Add to watchlist</a></button>
           @endif

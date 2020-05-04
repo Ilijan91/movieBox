@@ -24,6 +24,9 @@
 		
         <hr />
         <div class="movie-trailer-grid">
+          @if($movies==null)
+            <h4>Watchlist is empty</h4>
+          @else
           @foreach ($movies as $movie)
           <div class="trailer1">
             <a href="{{ route('movies.showMovie', $movie[0]->id) }}">{{ $movie[0]->title }}</a>
@@ -51,7 +54,7 @@
           </div>
           
           @endforeach
-          
+          @endif
         </div>
 
 

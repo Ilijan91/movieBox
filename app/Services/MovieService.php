@@ -2,19 +2,22 @@
 
 namespace App\Services;
 
-use App\Repositories\MoviesRepositoryInterface;
-use Illuminate\Support\Facades\Http;
 use stdClass;
+use Illuminate\Support\Facades\Http;
+use App\Repositories\MoviesRepositoryInterface;
+use Illuminate\Support\Arr;
 
 class MovieService
 {
     protected $moviesRepository;
     protected $watchlistService;
+    protected $genreService;
 
-    public function __construct(MoviesRepositoryInterface $moviesRepository,WatchlistService $watchlistService)
+    public function __construct(MoviesRepositoryInterface $moviesRepository,WatchlistService $watchlistService,GenreService $genreService)
     {
         $this->moviesRepository = $moviesRepository;
         $this->watchlistService = $watchlistService;
+        $this->genreService= $genreService;
     }
 
     public function getPopularMovies(){
@@ -69,6 +72,40 @@ class MovieService
         $movie_id=$this->watchlistService->getPopularMovie();
         return $this->moviesRepository->find($movie_id);
     }
+
+    public function getMoviesGenres($movies){
+
+        $genres=collect($this->genreService->getGenres())->mapWithKeys(function ($genre){
+            return [$genre['id']=> $genre['name']];
+        });
+        $genreArray=[];
+        foreach($movies as $movie){
+            $zanrovi=null;
+            
+            foreach(explode(',',$movie->genre_id) as $genre){
+                $zanrovi .= $genres->get($genre).",";
+                $genreArray[$movie->id]=explode(',',$zanrovi);
+            }
+            $removed = array_pop($genreArray[$movie->id]);
+        }
+        
+        return $genreArray;
+    }
+
+    public function getMovieGenres($movie){
+        $genres=collect($this->genreService->getGenres())->mapWithKeys(function ($genre){
+            return [$genre['id']=> $genre['name']];
+        });
+        $genreArray=[];
+        $zanrovi=null;
+        foreach(explode(',',$movie->genre_id) as $genre){
+            $zanrovi .= $genres->get($genre).",";
+            $genreArray[$movie->id]=explode(',',$zanrovi);
+        }
+        $removed = array_pop($genreArray[$movie->id]);
+        return $genreArray;
+    }
+
     private function fatchTopRatedMovies(){
         return Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/movie/top_rated')

@@ -25,16 +25,23 @@ class HomeController extends Controller
 
     public function index()
     {
-        $movies=$this->movieService->getNowPlayingMovies(); 
-        $moviesgenres=$this->genreService->getGenres();
-        if($movies->count() == 0 && $moviesgenres->count() == 0){
+        $movies=$this->movieService->getNowPlayingMovies();       
+        $moviesgenres=$this->movieService->getMoviesGenres($movies);
+        
+        if($movies->count() == 0 && empty($moviesgenres)){
             $this->movieService->saveMovies();
             $this->genreService->saveGenres();
             $movies=$this->movieService->getNowPlayingMovies();
-            $moviesgenres=$this->genreService->getGenres(); 
+            $moviesgenres=$this->movieService->getMoviesGenres($movies);
         }
         $popularMovie=$this->movieService->mostPopularMovie();
-        $videos=$this->movieService->findVideo($popularMovie[0]->id);
+        if($popularMovie->count()!= 0){
+            $videos=$this->movieService->findVideo($popularMovie[0]->id);
+        }else{
+            $popularMovie= null;
+            $videos= null;
+        }
+        
         return view('home',compact('movies','moviesgenres','popularMovie','videos'));
     }
 
@@ -46,7 +53,7 @@ class HomeController extends Controller
         if($movie== null){
             $movie=$this->movieService->findMovie($id);
         }
-        $moviesgenres=$this->genreService->getGenres();
+        $moviesgenres=$this->movieService->getMovieGenres($movie);
         $videos=$this->movieService->findVideo($id);
         return view('details',compact('movie','moviesgenres','videos'));
     }
@@ -54,26 +61,44 @@ class HomeController extends Controller
     public function showTopRatedMovies()
     {
         $movies=$this->movieService->getTopRatedMovies(); 
-        $moviesgenres=$this->genreService->getGenres();
+        $moviesgenres=$this->movieService->getMoviesGenres($movies);
         $popularMovie=$this->movieService->mostPopularMovie();
-        $videos=$this->movieService->findVideo($popularMovie[0]->id);
+        if($popularMovie->count()!= 0){
+            $videos=$this->movieService->findVideo($popularMovie[0]->id);
+        }else{
+            $popularMovie= null;
+            $videos= null;
+        }
+        
         return view('home',compact('movies','moviesgenres','popularMovie','videos'));
     }
 
     public function showUpcomingMovies()
     {
         $movies=$this->movieService->getUpcomingMovies(); 
-        $moviesgenres=$this->genreService->getGenres();
+        $moviesgenres=$this->movieService->getMoviesGenres($movies);
         $popularMovie=$this->movieService->mostPopularMovie();
-        $videos=$this->movieService->findVideo($popularMovie[0]->id);
+        if($popularMovie->count()!= 0){
+            $videos=$this->movieService->findVideo($popularMovie[0]->id);
+        }else{
+            $popularMovie= null;
+            $videos= null;
+        }
+        
         return view('home',compact('movies','moviesgenres','popularMovie','videos'));
     }
     public function showPopularMovies()
     {
         $movies=$this->movieService->getPopularMovies(); 
-        $moviesgenres=$this->genreService->getGenres();
+        $moviesgenres=$this->movieService->getMoviesGenres($movies);
         $popularMovie=$this->movieService->mostPopularMovie();
-        $videos=$this->movieService->findVideo($popularMovie[0]->id);
+        if($popularMovie->count()!= 0){
+            $videos=$this->movieService->findVideo($popularMovie[0]->id);
+        }else{
+            $popularMovie= null;
+            $videos= null;
+        }
+        
         return view('home',compact('movies','moviesgenres','popularMovie','videos'));
     }
     
