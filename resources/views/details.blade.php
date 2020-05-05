@@ -54,6 +54,7 @@
               <button disabled="primary"><a href="https://www.youtube.com/watch?v={{$videos[0]['key']}}">Play Video</a></button>
             @endif
               <div class="column1">
+                
                 @foreach ($moviesgenres[$movie->id] as $genre)
                   <span class="tag"> {{$genre}}</span>
                 @endforeach

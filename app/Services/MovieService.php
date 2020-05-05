@@ -105,7 +105,23 @@ class MovieService
         $removed = array_pop($genreArray[$movie->id]);
         return $genreArray;
     }
+    public function findMovieGenres($movie){
+        $genres=collect($this->genreService->getGenres())->mapWithKeys(function ($genre){
+            return [$genre['id']=> $genre['name']];
+        });
+        
+        
+        $genreArray=[];
+        $zanrovi=null;
+        foreach($movie->genres as $genre){
+            $zanrovi .= $genres->get($genre['id']).",";
+            $genreArray[$movie->id]=explode(',',$zanrovi);
+            
+        }
+        $removed = array_pop($genreArray[$movie->id]);
+        return $genreArray;
 
+    }
     private function fatchTopRatedMovies(){
         return Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/movie/top_rated')

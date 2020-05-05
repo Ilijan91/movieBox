@@ -55,10 +55,15 @@ class HomeController extends Controller
     {
         // Search first movie in database, if not found , search in TMDB API
         $movie=$this->movieService->getMovie($id);
+       
         if($movie== null){
             $movie=$this->movieService->findMovie($id);
+            $moviesgenres=$this->movieService->findMovieGenres($movie);
+            
+        }else{
+             $moviesgenres=$this->movieService->getMovieGenres($movie);
+        
         }
-        $moviesgenres=$this->movieService->getMovieGenres($movie);
         $videos=$this->movieService->findVideo($id);
         return view('details',compact('movie','moviesgenres','videos'));
     }
