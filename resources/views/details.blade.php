@@ -54,25 +54,10 @@
               <button disabled="primary"><a href="https://www.youtube.com/watch?v={{$videos[0]['key']}}">Play Video</a></button>
             @endif
               <div class="column1">
-              @if($movie->genres != 0) 
-                @foreach ($movie->genres as $genre )
-                  @foreach ($moviesgenres as $g)
-                    @if($g->id == $genre['id'])
-                    <span class="tag"> {{$g->name}}</span>
-                    @endif
-                  @endforeach
+                @foreach ($moviesgenres[$movie->id] as $genre)
+                  <span class="tag"> {{$genre}}</span>
                 @endforeach
-              @else 
-                @foreach (explode(',',$movie->genre_id) as $genre )
-                  @foreach ($moviesgenres as $g)
-                    @if($g->id== $genre)
-                    <span class="tag"> {{$g->name}}</span>
-                    @endif
-                  @endforeach
-                @endforeach
-              @endif
-            </div> 
-            
+              </div>
             <div class="column2">
               
               <p>{{$movie->overview}}</p>

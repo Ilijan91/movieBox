@@ -15,12 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 Route::get('/','HomeController@index')->name('movies.index');
+Route::get('/home','HomeController@index')->name('movies.index');
 Route::get('/movies/{id}','HomeController@showMovie')->name('movies.showMovie');
 
-Route::get('/home','HomeController@index')->name('movies.index');
 Route::get('/toprated','HomeController@showTopRatedMovies')->name('movies.showTopRatedMovies');
 Route::get('/upcoming','HomeController@showUpcomingMovies')->name('movies.showUpcomingMovies');
 Route::get('/popular','HomeController@showPopularMovies')->name('movies.showPopularMovies');
 
-
+Route::get('/watchlist/{user_id}','WatchlistsController@index')->name('watchlist.index');
+Route::delete('/watchlist/destroy/{movie_id}', 'WatchlistsController@destroy')->name('watchlist.destroy');;
+Route::get('/addmovie/{movie_id}','WatchlistsController@store')->name('watchlist.store');
 
