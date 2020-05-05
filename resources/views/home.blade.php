@@ -77,7 +77,7 @@
         <div class="movie-trailer-grid">
           @foreach ($movies as $movie)
           <div class="trailer1">
-            <a href="{{ route('movies.showMovie', $movie->id) }}">{{ $movie->title }}</a>
+            <a href="{{ route('movies.showMovie', $movie->id) }}">{{ mb_strimwidth($movie->title, 0, 19, "...") }}</a>
               <img src="{{'https://image.tmdb.org/t/p/original'. $movie->poster_path}}" alt="poster">
             </a>
             <div>
