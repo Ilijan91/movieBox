@@ -46,23 +46,19 @@ class HomeController extends Controller
             $videos= null;
             $popularMovieGenres=null;
         }
-        
         return view('home',compact('movies','moviesgenres','popularMovieGenres','popularMovie','videos'));
     }
 
    
     public function showMovie($id)
     {
-        // Search first movie in database, if not found , search in TMDB API
+        // Search first movie in database, if not found , search from API
         $movie=$this->movieService->getMovie($id);
-       
         if($movie== null){
             $movie=$this->movieService->findMovie($id);
             $moviesgenres=$this->movieService->findMovieGenres($movie);
-            
         }else{
              $moviesgenres=$this->movieService->getMovieGenres($movie);
-        
         }
         $videos=$this->movieService->findVideo($id);
         return view('details',compact('movie','moviesgenres','videos'));
