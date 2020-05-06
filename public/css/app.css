@@ -375,12 +375,6 @@ body {
 }
 
 .bgslide {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 920px;
-  min-height: 650px;
   float: left;
   position: relative;
   border-bottom: 2px solid #ff0079;
@@ -11796,7 +11790,7 @@ a.text-dark:focus {
 }
 
 .nav-nav {
-  position: absolute;
+  position: relative;
   z-index: 100;
   float: right;
   width: 100%;

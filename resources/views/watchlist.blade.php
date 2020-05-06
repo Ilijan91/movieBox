@@ -17,7 +17,7 @@
     ></script>
   </head>
   <body>
-    <div class="wrapper-all">
+    <div class="wrapper">
       <div class="grey-background">
         <div class="bgslide">
           @if($popularMovie != null)
