@@ -47,6 +47,7 @@
                 @endforeach
               @endforeach
             @endif
+
           </div> 
           
           <div class="column-2">

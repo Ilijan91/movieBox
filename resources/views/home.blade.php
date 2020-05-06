@@ -11,19 +11,16 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
       rel="stylesheet"
     />
-    <script
-      src="https://kit.fontawesome.com/ee1ec2542e.js"
-      crossorigin="anonymous"
-    ></script>
+ 
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
   </head>
   <body>
     <div class="wrapper">
+      <div class="grey-background">
       <div class="bgslide">
-    
 
-        <div class="">
           <h1 class="header-line">{{$popularMovie[0]->title}}</h1>
           <div class="filter-navbar">
             @foreach (explode(',',$popularMovie[0]->genre_id) as $genre )
@@ -56,12 +53,7 @@
               </div>
             </div>
           </div>
-        </div>
-        
-
-
       </div>
-     
       <div class="movie-poster-wrapper">
         <div class="movie-categorisation">
           <a href="{{route('movies.index')}}" class="btn-movie-filter btn-rated">Now Playing</a>
@@ -74,10 +66,8 @@
             <span class="icon-view icon-grid"><i class="fas fa-th-large" onclick="gridView()"></i></span>
           </div>
 		</div>
-		
         <hr />
         <div class="movie-trailer-grid" id="column1">
-          
           @foreach ($movies as $movie)
           <div class="trailer-card">
             <div class="movie-date-wrapper">
@@ -89,7 +79,6 @@
             <div class="movie-rating-wrapper">
               <span class="ml-1"><span class="movie-rating">{{ $movie->rating }}</span> </span>
         </div>
-        
         <div class="genre-wrapper">
           @foreach (explode(',',$movie->genre_id) as $genre)
             @foreach ($moviesgenres as $g)
@@ -106,8 +95,8 @@
           </div>
           @endforeach
         </div>
-
-
+      </div>
+      </div>
       <div class="footer">
 		<div class="footer-navmeni">
 			<p class="nav-items">Contact</p>
@@ -119,7 +108,6 @@
 		  <p class="copyright">Designed by Milan Houter, All rights reserved.</p>
       </div>
     </div>
-
   </body>
 </html>
 

@@ -1,5 +1,9 @@
+<script
+src="https://kit.fontawesome.com/ee1ec2542e.js"
+crossorigin="anonymous"
+></script>
 <div class="relative md:mt-0">
-    <input wire:model="search" name="search" type="text" placeholder="Search...">
+  <input wire:model="search" class="search-livewire-style" name="search" type="text">
     @if(strlen($search) >= 2)
         <div class="absolute">
             @if ($searchResult->count()>0)

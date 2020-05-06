@@ -91,12 +91,12 @@
     position: relative;
 
     .footer {
+        margin-top: 100px;
         .footer-navmeni {
             float: right;
-            margin-right: 50px;
             .nav-items {
                 color: $menu-nav;
-                font-size: 20px;
+                font-size: 17px;
                 width: auto;
                 height: auto;
                 /* display: inline-block; */
@@ -278,7 +278,9 @@
     flex-wrap: wrap;
     align-items: center;
 }
-
+.grey-background{
+    background: #f8f8f8;
+}
 //***media queries***
 
 @include responsive(laptop) {
