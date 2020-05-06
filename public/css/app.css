@@ -375,7 +375,6 @@ body {
 }
 
 .bgslide {
-  background-image: url(/images/bg.jpg?43de78479d9a954444f60c01c6f8b824);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -408,6 +407,17 @@ body {
   text-decoration: none;
   padding: 14px 20px;
   text-align: center;
+}
+
+.bgimage {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  float: left;
+  position: relative;
+  border-bottom: 2px solid #ff0079;
 }
 
 .movie-poster-wrapper {

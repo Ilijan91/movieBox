@@ -58,11 +58,16 @@
             <p>{{$movie->overview}}</p>
           </div> 
         </div>
-         <div class="more-images-movie">
-           @foreach ($images['backdrops'] as $image)
-           <a href="#"> <img src="{{'https://image.tmdb.org/t/p/w500/'. $image['file_path']}}" alt="poster" class="movie-poster-1"></a>    
-           @endforeach
-          </div>
+        
+          
+        <div class="more-images-movie">
+          @foreach ($images['backdrops'] as $image)
+          @if($loop->index < 9)
+            <a href="#"> <img src="{{'https://image.tmdb.org/t/p/w500/'. $image['file_path']}}" alt="poster" class="movie-poster-1"></a> 
+          @endif   
+          @endforeach
+        </div>
+          
        </div> 
      </div> 
      </div>
@@ -88,3 +93,6 @@ function hideVideo(div,video_id) {
 </html>
 
 @endsection 
+
+
+

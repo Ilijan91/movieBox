@@ -21,6 +21,7 @@
       <div class="grey-background">
       <div class="bgslide">
           @if($popularMovie != null)
+          <img class="bgimage" src="{{'https://image.tmdb.org/t/p/original'.$popularMovie[0]->poster_path}}" alt="backgrouind">
           <h1 class="header-line">{{$popularMovie[0]->title}}</h1>
           <div class="filter-navbar">
             @foreach ($popularMovieGenres[$popularMovie[0]->id] as $genre)
@@ -29,7 +30,7 @@
           </div>
           <div class="button-navbar">
             @if(count($videos)>0)
-              <button class="btn-watch-movie"><a href="https://www.youtube.com/watch?v={{$videos[0]['key']}}">WATCH MOVIE</a></button>
+            <button class="btn-watch-trailer" onclick="revealVideo('video','youtube')"><a href="https://www.youtube.com/embed/{{$videos[0]['key']}}" target="targetVideo">Watch Trailer</a></button>
             @endif
             <button class="btn-view-info"><a href="{{ route('movies.showMovie', $popularMovie[0]->id) }}">VIEW INFO</a></button>
             <button class="btn-add-to-wishlist"><a href="{{'addmovie/'. $popularMovie[0]->id}}">+ ADD TO WISHLIST</a></button>
@@ -102,6 +103,34 @@
       
       </div>
     </div>
+    <div id="video" class="lightbox" onclick="hideVideo('video','youtube')">
+      <div class="lightbox-container">  
+        <div class="lightbox-content">
+          
+          <button onclick="hideVideo('video','youtube')" class="lightbox-close">
+            Close | ✕
+          </button>
+          <div class="video-container">
+            <iframe id="youtube" width="960" name="targetVideo" height="540" frameborder="0" allowfullscreen></iframe>
+          </div>      
+          
+        </div>
+      </div>
+    </div>
+    <script>
+      function revealVideo(div,video_id) {
+        var video = document.getElementById(video_id).src;
+        document.getElementById(video_id).src = video+'&autoplay=1'; 
+        document.getElementById(div).style.display = 'block';
+      }
+      
+      function hideVideo(div,video_id) {
+        var video = document.getElementById(video_id).src;
+        var cleaned = video.replace('&autoplay=1',''); 
+        document.getElementById(video_id).src = cleaned;
+        document.getElementById(div).style.display = 'none';
+      }
+          </script>
   </body>
 </html>
 
