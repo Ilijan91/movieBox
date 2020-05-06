@@ -5,13 +5,18 @@ namespace App\Repositories;
 
 interface MoviesRepositoryInterface
 {
-    public function getMovies();
+   
+    public function getPopular();
 
-    public function getGenres();
+    public function getTopRated();
 
-    public function findMovie($id);
+    public function getNowPlaying();
 
-    public function save($movies ,$genres);
+    public function getUpcoming();
+     
+    public function find($id);
+
+    public function save($movies, $flag);
     
 
 

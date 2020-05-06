@@ -4,36 +4,76 @@ namespace App\Services;
 
 use App\Repositories\MoviesRepositoryInterface;
 use Illuminate\Support\Facades\Http;
+use stdClass;
 
 class MovieService
 {
     protected $moviesRepository;
+    protected $watchlistService;
 
-
-    public function __construct(MoviesRepositoryInterface $moviesRepository)
+    public function __construct(MoviesRepositoryInterface $moviesRepository,WatchlistService $watchlistService)
     {
         $this->moviesRepository = $moviesRepository;
-    
+        $this->watchlistService = $watchlistService;
     }
 
     public function getPopularMovies(){
-        return $this->moviesRepository->getMovies();
+        return $this->moviesRepository->getPopular();
+    }
+    public function getTopRatedMovies(){
+        return $this->moviesRepository->getTopRated();
+    }
+    public function getNowPlayingMovies(){
+        return $this->moviesRepository->getNowPlaying();
+    }
+    public function getUpcomingMovies(){
+        return $this->moviesRepository->getUpcoming();
     }
 
-    public function getMovieGenres(){
-        return $this->moviesRepository->getGenres();
-    }
-    public function getMovie($id){
-        return $this->moviesRepository->findMovie($id);
-    }
-
-    public function saveMovies(){
-        $movies =  $this->fatchPopularMovies();
-        $genres =$this->fatchMovieGenres();
+    public function findMovie($id){
+        $movie=$this->fatchMovieById($id);
         
-        return $this->moviesRepository->save($movies, $genres);
+        $object = new stdClass();
+            foreach ($movie as $key => $value)
+            {
+                $object->$key = $value;
+            }
+        return $object;
+    }
+    public function findVideo($id){
+        return $this->fatchMovieVideo($id);
+    }
+    
+    public function getMovie($id){
+        return $this->moviesRepository->find($id);
     }
 
+    public function saveMovies(){ 
+
+        $popular =  $this->fatchPopularMovies();
+        $popularFlag= 'is_popular';
+        $topRated =  $this->fatchTopRatedMovies();
+        $topRatedFlag= 'is_top_rated';
+        $nowPlaying =  $this->fatchNowPlayingMovies();
+        $nowPlayingFlag= 'is_now_playing';
+        $upcoming =  $this->fatchUpcomingMovies();
+        $upcomingFlag= 'is_upcoming';
+        
+        $this->moviesRepository->save($popular ,$popularFlag);
+        $this->moviesRepository->save($topRated ,$topRatedFlag);
+        $this->moviesRepository->save($nowPlaying ,$nowPlayingFlag);
+        $this->moviesRepository->save($upcoming ,$upcomingFlag);
+    }
+
+    public function mostPopularMovie(){
+        $movie_id=$this->watchlistService->getPopularMovie();
+        return $this->moviesRepository->find($movie_id);
+    }
+    private function fatchTopRatedMovies(){
+        return Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/movie/top_rated')
+            ->json()['results'];
+    }
 
     private function fatchPopularMovies(){
         return Http::withToken(config('services.tmdb.token'))
@@ -41,13 +81,31 @@ class MovieService
             ->json()['results'];
     }
 
-    private function fatchMovieGenres(){
+    private function fatchUpcomingMovies(){
         return Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/genre/movie/list')
-            ->json()['genres'];
+            ->get('https://api.themoviedb.org/3/movie/upcoming')
+            ->json()['results'];
     }
 
+    private function fatchNowPlayingMovies(){
+        return Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/movie/now_playing')
+            ->json()['results'];
+    }
 
+    private function fatchMovieById($id){
+        return Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/movie/'. $id)
+            ->json();
+    }
+    
+    private function fatchMovieVideo($id){
+        return Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/movie/' . $id . '/videos')
+            ->json()['results'];
+    }
+
+   
 
 
 

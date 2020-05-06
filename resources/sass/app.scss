@@ -1,13 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
+ 
 // Variables
 @import 'variables';
+@import '_mediaQueries.scss';
 
 //import pages
 @import 'details.scss';
 @import 'home.scss';
 @import 'login.scss';
+@import 'wishlist.scss';
 
+//navigation
+@import 'navigation.scss';
 // Bootstrap
 // @import '~bootstrap/scss/bootstrap';
 
@@ -24,4 +28,43 @@ html,body{
 
 .navbar{
     background: rgba(51, 255, 0, 0.13);
+}
+
+
+
+
+
+// .list-wrapper {
+// 	display: flex;
+// 	flex-direction: column;
+// 	background: yellow;
+//   }
+//   .grid-wrapper {
+// 	display: flex;
+// 	flex-direction: row;
+// 	align-items: center;
+// 	justify-content: center;
+//   }
+
+//   .column {
+// 	float: left;
+// 	width: 50%;
+// 	padding: 10px;
+//   }
+.list-wrapper{
+	display: flex;
+	flex-direction: row;
+	background: purple;
+}
+.grid-wrapper{
+	display: flex;
+	flex-direction: column;
+	background: pink;
+}
+
+.card-list-wrapper{
+	width: 200px;
+}
+.card-grid-wrapper{
+	width: 90%;
 }
