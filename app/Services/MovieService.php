@@ -48,6 +48,10 @@ class MovieService
     public function findVideo($id){
         return $this->fatchMovieVideo($id);
     }
+    //Method to get movie images by id from api
+    public function findImages($id){
+        return $this->fatchMovieImages($id);
+    }
     // Method to get movie by id from database
     public function getMovie($id){
         return $this->moviesRepository->find($id);
@@ -153,6 +157,12 @@ class MovieService
         return Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/movie/' . $id . '/videos')
             ->json()['results'];
+    }
+    //Private Method to get movie images from API
+    private function fatchMovieImages($id){
+        return Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/movie/' . $id . '/images')
+            ->json();
     }
 
    

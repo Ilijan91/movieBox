@@ -1,68 +1,74 @@
+
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+@mixin poster-images {
+  width: 140px;
+  margin-right: 50px;
+  margin-top: 20px;
+  margin-left: 80px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 19px 21px -10px rgba(242,0,255,0.59);
+  -moz-box-shadow: 0px 19px 21px -10px rgba(242,0,255,0.59);
+  box-shadow: 0px 19px 21px -10px $pink;
+}
+
+
 *, *:before, *:after {
   box-sizing: border-box;
 }
-
 .body-wrapper {
   position: relative;
   top: 0; bottom: 0; left: 0; right: 0;
-  /* height: 100%; */
-}
-.body-wrapper:before {
-  content: "";
-  position: absolute;
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/hobbit_bg.jpg");
-  background-size: cover;
-  z-index: -1; /* Keep the background behind the content */
-  height: 20%; width: 20%; /* Using Glen Maddern's trick /via @mente */
-
-  /* don't forget to use the prefixes you need */
-  transform: scale(5);
-  transform-origin: top left;
-  filter: blur(1px);
-}
-
-a {
-  text-decoration: none;
-  color: #5C7FB8;
-}
-
-a:hover {
-  text-decoration: underline;
+  height: 100%;
+  &:before {
+    content: "";
+    position: absolute;
+    background: url("../sass/images/bg.jpg");
+    background-size: cover;
+    z-index: -1; 
+    height: 20%; width: 20%; 
+    transform: scale(5);
+    transform-origin: top left;
+    filter: blur(0.6px);
+  }
 }
 
 .movie-card {
   font: 14px/22px "Lato", Arial, sans-serif;
-  color: #A9A8A3;
+  color: $movie-card-text;
   padding: 40px 0;
+  padding-top: 120px;
 }
-
 .main-wrapper {
   margin: 0 auto;
   width: 1000px;
   height: 100%;
-  background: #F0F0ED;
+  background: $pure-white;
   border-radius: 5px;
   position: relative;
-}
-@media screen and (max-width: 1366px) {
-	.main-wrapper{
-		width: 90%;
-	}
-}
-.hero {
+  .cover {
+    position: absolute;
+    top: 160px;
+    left: 40px;
+    z-index: 2;
+    border: 2px solid $pink;
+    border-radius: 3px;
+  }
+  .movie-cover  {
   height: 342px;
+  width: 100%;
+  filter:brightness(60%);
   margin: 0;
   position: relative;
   overflow: hidden;
   z-index: 1;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  .trailer-cover-image{
+  width: 100%;
 }
-
-
-.hero:before {
+&:before {
   content: '';
   width: 100%;
   height: 100%;
@@ -70,8 +76,7 @@ a:hover {
   overflow: hidden;
   top: 0;
   left: 0;
-  background: red;
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/hobbit_bg.jpg");
+  // background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/hobbit_bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   z-index: -1;
@@ -81,183 +86,129 @@ a:hover {
           transform-origin: 0 0;
   -webkit-backface-visibility: hidden;
 }
-
-.cover {
-  position: absolute;
-  top: 160px;
-  left: 40px;
-  z-index: 2;
-}
-
 .details {
   padding: 190px 0 0 280px;
+  .title-1 {
+    color: $pure-white;
+    position: absolute;
+    font-size: 25px;
+    line-height: 30px;
+    width: 400px;
+    margin-top: -350px;
+    z-index: 20;
 }
-.details .title1 {
-  color: white;
-  font-size: 44px;
-  margin-bottom: 13px;
-  position: relative;
 }
-.details .title1 span {
+}
+&:before {
+  content: '';
+  width: 100%;
+  height: 100%;
   position: absolute;
-  top: 3px;
-  margin-left: 12px;
-  background: #C4AF3D;
-  border-radius: 5px;
-  color: #544C21;
-  font-size: 14px;
-  padding: 0px 4px;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  // background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/hobbit_bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  -webkit-transform: skewY(-2.2deg);
+          transform: skewY(-2.2deg);
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  -webkit-backface-visibility: hidden;
 }
-.details .title2 {
-  color: #C7C1BA;
-  font-size: 23px;
-  font-weight: 300;
-  margin-bottom: 15px;
-}
-.details .likes {
-  margin-left: 24px;
-}
-.details .likes:before {
-  content: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/icon_like.png");
-  position: relative;
-  top: 2px;
-  padding-right: 7px;
-}
-
 .description {
   bottom: 0px;
-  height: 200px;
+  height: 440px;
   font-size: 16px;
   line-height: 26px;
-  color: #B1B0AC;
-}
-
-.column1 {
-  padding-left: 50px;
-  padding-top: 120px;
-  width: 220px;
-  float: left;
-  text-align: center;
-}
-
-.tag {
-  background: white;
-  border-radius: 10px;
-  padding: 3px 8px;
-  font-size: 14px;
-  margin-right: 4px;
-  line-height: 35px;
-  cursor: pointer;
-}
-
-.tag:hover {
-  background: #ddd;
-}
-
-.column2 {
+  color: $description;
+  .column-1 {
+    padding-left: 50px;
+    padding-top: 120px;
+    width: 220px;
+    float: left;
+    text-align: center;
+    .tag {
+      background: $pure-white;
+      border-radius: 10px;
+      padding: 3px 8px;
+      font-size: 14px;
+      margin-right: 4px;
+      line-height: 35px;
+      cursor: pointer;
+    }
+    .tag:hover {
+  background: $tag-hover;
+    }
+  }
+  .column-2 {
   padding-left: 41px;
   padding-top: 30px;
   margin-left: 20px;
   width: 480px;
   float: left;
 }
-
-fieldset, label {
-  margin: 0;
-  padding: 0;
+}
+}
+.more-images-movie{
+      display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: -200px;
+    .movie-poster-1 {
+      @include poster-images;
+    }
+    .movie-poster-2{
+      @include poster-images;
+    }
+    .movie-poster-3{
+      @include poster-images;
+      margin-bottom: 100px;
+    }
 }
 
-/****** Style Star Rating Widget *****/
-.rating {
-  border: none;
-  float: left;
+//***media queries***
+
+@media screen and (max-width: 650px) {
+	.column-2{
+    width: 80% !important;
+  }
+  .body-wrapper{
+    height: 100%;
+  }
+	.cover{
+		width: 120px;
+  }
+  .movie-cover:before {
+		transform: skewY(0);
+  }
+  .column-1{
+	  padding-top: 20px;
+  }
+  .details{
+    padding-top: 70px;
+    padding-left: 30px;
+  }
+  .title-1{
+    font-size: 35px;
+  }
+  .title-2{
+    font-size: 25px;
+  }
+  .more-images-movie{
+    display: contents;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 1366px) {
+	.main-wrapper{
+		width: 90%;
+	}
 }
 
-.rating > input {
-  display: none;
-}
 
-.rating > label:before {
-  margin: 5px;
-  margin-top: 0;
-  font-size: 1em;
-  font-family: FontAwesome;
-  display: inline-block;
-  content: "\f005";
-}
 
-.rating > .half:before {
-  content: "\f089";
-  position: absolute;
-}
-
-.rating > label {
-  color: #ddd;
-  float: right;
-}
-
-/***** CSS Magic to Highlight Stars on Hover *****/
-.rating > input:checked ~ label,
-.rating:not(:checked) > label:hover,
-.rating:not(:checked) > label:hover ~ label {
-  color: #FFD700;
-}
-
-/* hover previous stars in list */
-.rating > input:checked + label:hover,
-.rating > input:checked ~ label:hover,
-.rating > label:hover ~ input:checked ~ label,
-.rating > input:checked ~ label:hover ~ label {
-  color: #FFED85;
-}
-
-a[data-tooltip] {
-  position: relative;
-}
-
-a[data-tooltip]::before,
-a[data-tooltip]::after {
-  position: absolute;
-  display: none;
-  opacity: 0.85;
-}
-
-a[data-tooltip]::before {
-
-  content: attr(data-tooltip);
-  background: #000;
-  color: #fff;
-  font-size: 13px;
-  padding: 5px;
-  border-radius: 5px;
-  white-space: nowrap;
-  text-decoration: none;
-}
-
-a[data-tooltip]::after {
-  width: 0;
-  height: 0;
-  border: 6px solid transparent;
-  content: '';
-}
-
-a[data-tooltip]:hover::before,
-a[data-tooltip]:hover::after {
-  display: block;
-}
-
-/** positioning **/
-/* top tooltip */
-a[data-tooltip][data-placement="top"]::before {
-  bottom: 100%;
-  left: 0;
-  margin-bottom: 40px;
-}
-
-a[data-tooltip][data-placement="top"]::after {
-  border-top-color: #000;
-  border-bottom: none;
-  bottom: 50px;
-  left: 20px;
-  margin-bottom: 4px;
-}

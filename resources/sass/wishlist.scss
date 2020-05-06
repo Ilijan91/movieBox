@@ -1,0 +1,50 @@
+
+.wrapper-all{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.btn-wishlist{
+    width: 150px;
+    background: #ff00ee;
+    color: white; 
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    a{
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    }
+}
+.trailer-card-wishlist{
+    @include trailer-card-all;
+}
+.footer-2 {
+    margin-top: 100px;
+    .footer-navmeni-2 {
+        display: flex;
+        flex-direction: row;
+        float: right;
+        .nav-items-2 {
+            color: $menu-nav;
+            font-size: 17px;
+            width: auto;
+            height: auto;
+            /* display: inline-block; */
+            float: right;
+            padding-right: 10px;
+            margin-right: 40px;
+        }
+    }
+    .footer-logo-title-2 {
+        margin-left: 50px;
+        font-size: 30px;
+        color: $footer-logo;
+    }
+    .copyright {
+        margin-left: 50px;
+        color: $copyright-grey;
+        padding-top: 20px;
+    }
+}

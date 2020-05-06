@@ -61,7 +61,9 @@ class HomeController extends Controller
              $moviesgenres=$this->movieService->getMovieGenres($movie);
         }
         $videos=$this->movieService->findVideo($id);
-        return view('details',compact('movie','moviesgenres','videos'));
+        $images=$this->movieService->findImages($id);
+        
+        return view('details',compact('movie','moviesgenres','videos','images'));
     }
 
     public function showTopRatedMovies()
