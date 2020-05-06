@@ -49,24 +49,9 @@
          </div> 
          <div class="description">
             <div class="column-1">
-            @if($movie->genres != 0) 
-              @foreach ($movie->genres as $genre )
-                @foreach ($moviesgenres as $g)
-                  @if($g->id == $genre['id'])
-                  <span class="tag"> {{$g->name}}</span>
-                  @endif
-                @endforeach
-              @endforeach
-            @else 
-              @foreach (explode(',',$movie->genre_id) as $genre )
-                @foreach ($moviesgenres as $g)
-                  @if($g->id== $genre)
-                  <span class="tag"> {{$g->name}}</span>
-                  @endif
-                @endforeach
-              @endforeach
-            @endif
-
+              @foreach ($moviesgenres[$movie->id] as $genre)
+              <span class="tag"> {{$genre}}</span>
+            @endforeach
           </div> 
           
           <div class="column-2">
@@ -74,9 +59,9 @@
           </div> 
         </div>
          <div class="more-images-movie">
-          <a href="#"> <img src="{{'https://image.tmdb.org/t/p/w200/'. $movie->poster_path}}" alt="poster" class="movie-poster-1"></a>
-          <a href="#"> <img src="{{'https://image.tmdb.org/t/p/w200/'. $movie->poster_path}}" alt="poster" class="movie-poster-2"></a>
-          <a href="#"> <img src="{{'https://image.tmdb.org/t/p/w200/'. $movie->poster_path}}" alt="poster" class="movie-poster-3"></a>
+           @foreach ($images['backdrops'] as $image)
+           <a href="#"> <img src="{{'https://image.tmdb.org/t/p/w500/'. $image['file_path']}}" alt="poster" class="movie-poster-1"></a>    
+           @endforeach
           </div>
        </div> 
      </div> 
@@ -103,35 +88,3 @@ function hideVideo(div,video_id) {
 </html>
 
 @endsection 
-
-{{-- 
-    <div class="description">
-      @if(count($videos)>0)
-        <button disabled="primary"><a href="https://www.youtube.com/watch?v={{$videos[0]['key']}}">Play Video</a></button>
-      @endif
-        <div class="column1">
-        @if($movie->genres != 0) 
-          @foreach ($movie->genres as $genre )
-            @foreach ($moviesgenres as $g)
-              @if($g->id == $genre['id'])
-              <span class="tag"> {{$g->name}}</span>
-              @endif
-            @endforeach
-          @endforeach
-        @else 
-          @foreach (explode(',',$movie->genre_id) as $genre )
-            @foreach ($moviesgenres as $g)
-              @if($g->id== $genre)
-              <span class="tag"> {{$g->name}}</span>
-              @endif
-            @endforeach
-          @endforeach
-        @endif
-      </div> 
-      
-      <div class="column2">
-        
-        <p>{{$movie->overview}}</p>
-        
-      </div> 
-    </div>  --}}

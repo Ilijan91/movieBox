@@ -12,15 +12,20 @@ class WatchlistRepository implements WatchlistRepositoryInterface
     public function getAll($id){
 
         $movieIds=Watchlist::where('user_id',$id)->get();
-       
-        foreach($movieIds as $movieId){
-            $movies[]= Movie::where('id',$movieId->movie_id)->get();
-            $moviesObj=new stdClass();
-            foreach ($movies as $key => $value){
-                $moviesObj->$key = $value;
+        if($movieIds->count() !=0){
+            foreach($movieIds as $movieId){
+                $movies[]= Movie::where('id',$movieId->movie_id)->get();
+                $moviesObj=new stdClass();
+                foreach ($movies as $key => $value){
+                    $moviesObj->$key = $value;
+                }
             }
+        
+            return $moviesObj;
+        }else{
+            return $moviesObj= null;
         }
-        return $moviesObj;
+        
     }
    
     public function save($id)

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Watchlist;
+
+use App\User;
+
 use App\Services\GenreService;
 use App\Services\WatchlistService;
 
@@ -19,9 +21,14 @@ class WatchlistsController extends Controller
    
     public function index($user_id)
     {
+        // User can see wathclist only if he is authorized
+        $user=User::findOrFail($user_id);
+        if($user->watchlist != null){
+            $this->authorize('view',$user->watchlist);
+        }
         $movies=$this->watchlistService->get($user_id); 
         $moviesgenres=$this->genreService->getGenres();
-
+        
         return view('watchlist',compact('movies','moviesgenres'));
     }
 
