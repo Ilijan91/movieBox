@@ -34,7 +34,7 @@
         0 6px 6px rgba(133, 133, 133, 0.23);
     margin-bottom: 30px;
     .card-trailer-bottom {
-        padding: 20px;
+        padding: 0 20px 20px 20px;
         .movie-title {
             font-size: 20px;
             text-decoration: none;
@@ -58,6 +58,7 @@
             }
         }
         .genre-wrapper {
+            margin-top: -15px;
             display: flex;
             .movie-genre {
                 color: $movie-genre-color;
@@ -141,6 +142,44 @@
             text-align: center;
         }
     }
+    
+
+    @include responsive(phone-l) {
+        .header-line {
+            color: white;
+            position: absolute;
+            top: 190px;
+            font-size: 40px;
+            margin-left: 130px;
+        }
+        .logo-box {
+            h1 {
+                font-size: 27px;
+                margin-left: -50px;
+            }
+        }
+        .button-navbar {
+            display: flex;
+            flex-direction: column;
+            margin-left: 90px;
+            .btn-watch-movie{
+                margin-bottom: 15px;
+            }
+            .btn-view-info{
+                margin-bottom: 15px;
+            }
+            .btn-add-to-wishlist{
+                margin-bottom: 15px;
+            }
+        }
+        .filter-navbar {
+            display: flex;
+            flex-direction: row;
+            font-size: 17px;
+            bottom: 400px;
+            margin: 0;
+        }
+    }
 }
 .bgimage {
     width: 100%;
@@ -168,11 +207,20 @@
             @include navbar-buttons;
             background-color: rgba(255, 255, 255, 0);
             border-radius: 3px;
+            width: 150px;
             border: none;
-            margin-right: 20px;
-            font-size: 30px;
+            margin-right: 5px;
+            font-size: 23px;
             color: $filter-nav;
             outline: none;
+            &:hover{
+            border-bottom: 2px solid $pink;
+            }
+            a{
+                &:hover{
+                    color: $pink;
+                }
+            }
         }
         .icon-list-1 {
             position: absolute;
@@ -192,6 +240,7 @@
         background-color: $hr-line;
         border: none;
         height: 2px;
+        margin-top: -2px;
         width: 100%;
     }
     .movie-trailer-grid {
@@ -288,6 +337,7 @@
 }
 //***media queries***
 
+
 @include responsive(laptop) {
     .bgslide {
         height: 800px;
@@ -308,6 +358,11 @@
         font-size: 20px;
         letter-spacing: 2px;
         margin-right: 0;
+        a{
+            &:hover{
+                color: $pink;
+            }
+        }
     }
     .movie-title {
         font-size: 18px !important;
@@ -347,27 +402,6 @@
     }
 }
 @include responsive(phone-l) {
-    .header-line {
-        position: relative !important;
-        margin-top: 300px !important;
-        font-size: 40px !important;
-        margin-left: 100px !important;
-    }
-    .logo-box {
-        h1 {
-            font-size: 27px !important;
-            margin-left: -50px !important;
-        }
-    }
-    .button-navbar {
-        @include flex-col;
-        margin-left: 120px;
-    }
-    .filter-navbar {
-        @include flex-col;
-        margin-top: 100px;
-        padding-bottom: 120px;
-    }
     .rating-card {
         position: absolute;
         bottom: -50px;
@@ -381,6 +415,9 @@
     }
     .movie-rating {
         margin-left: 10px;
+    }
+    .movie-categorisation{
+        margin-left: 60px;
     }
 }
 @include responsive(phone-m) {
