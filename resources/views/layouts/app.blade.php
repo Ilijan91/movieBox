@@ -13,10 +13,11 @@
             <!-- Scripts -->
             <script src="{{ asset('js/app.js') }}" defer></script>
             <livewire:styles>
+           
             <!-- Fonts -->
-            <link rel="dns-prefetch" href="//fonts.gstatic.com">
+            
             <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-        
+            
             <!-- Styles -->
             <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         </head>
@@ -43,7 +44,8 @@
                         <ul>
                             <!-- Authentication Links -->
                             @guest
-                            <li><livewire:search></li>
+                           
+                               <li><div class="flex"><livewire:search></div></li> 
                                 <li>
                                     <a href="{{ route('login') }}"><button class="btn-login-login">{{ __('Login') }}</button></a>
                                 </li>
