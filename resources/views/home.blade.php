@@ -15,6 +15,8 @@
       src="https://kit.fontawesome.com/ee1ec2542e.js"
       crossorigin="anonymous"
     ></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
   </head>
   <body>
     <div class="wrapper">
@@ -39,7 +41,7 @@
             <button class="btn-view-info"><a href="{{ route('movies.showMovie', $popularMovie[0]->id) }}">VIEW INFO</a></button>
             <button class="btn-add-to-wishlist"><a href="{{'addmovie/'. $popularMovie[0]->id}}">+ ADD TO WISHLIST</a></button>
           </div>
-          <div class="column">
+          <div class="rating-card-wrapper">
             <div class="rating-card">
               <h3>
                 Rating
@@ -60,76 +62,51 @@
 
       </div>
      
-      <div class="movieposter">
+      <div class="movie-poster-wrapper">
         <div class="movie-categorisation">
           <a href="{{route('movies.index')}}" class="btn-movie-filter btn-rated">Now Playing</a>
           <a href="{{route('movies.showTopRatedMovies')}}" class="btn-movie-filter btn-rated">Top Rated</a>
           <a href="{{route('movies.showUpcomingMovies')}}" class="btn-movie-filter btn-rated">Upcoming</a>
           <a href="{{route('movies.showPopularMovies')}}" class="btn-movie-filter btn-rated">Popular</a>
           
-          <span class="icon-view icon-grid"><i class="fas fa-th-large"></i></span>
-          <span class="icon-view icon-list"><i class="fas fa-stream"></i></span>
-          <div class="grid-and-list-view">
-		
-		  </div>
+          <div class="grid-list-icons">
+            <span class="icon-view icon-list-1"><i class="fas fa-stream" onclick="testFunction()"></i></span>
+            <span class="icon-view icon-grid"><i class="fas fa-th-large" onclick="gridView()"></i></span>
+          </div>
 		</div>
 		
         <hr />
-        <div class="movie-trailer-grid">
+        <div class="movie-trailer-grid" id="column1">
+          
           @foreach ($movies as $movie)
-          <div class="trailer1">
-            <a href="{{ route('movies.showMovie', $movie->id) }}">{{ $movie->title }}</a>
-              <img src="{{'https://image.tmdb.org/t/p/original'. $movie->poster_path}}" alt="poster">
-            </a>
-            <div>
-              <span class="ml-1">{{ $movie->rating }}</span>
-              <span class="mx-2">|</span>
-              <span>{{\Carbon\Carbon::parse($movie->release_date)->format('d M, Y')  }}</span>
-          </div>
-          @foreach (explode(',',$movie->genre_id) as $genre )
+          <div class="trailer-card">
+            <div class="movie-date-wrapper">
+              <span>{{\Carbon\Carbon::parse($movie->release_date)->format('Y')}}</span>
+              <img src="{{'https://image.tmdb.org/t/p/original'. $movie->poster_path}}" alt="poster" class="poster-image">
+            </div>
+            <div class="card-trailer-bottom">
+            <a href="{{ route('movies.showMovie', $movie->id) }}"><p class="movie-title">{{ $movie->title }} </p></a>
+            <div class="movie-rating-wrapper">
+              <span class="ml-1"><span class="movie-rating">{{ $movie->rating }}</span> </span>
+        </div>
+        
+        <div class="genre-wrapper">
+          @foreach (explode(',',$movie->genre_id) as $genre)
             @foreach ($moviesgenres as $g)
               @if($g->id== $genre)
-                {{$g->name}}|
+                <span class="movie-genre">{{$g->name}}</span>
               @endif
             @endforeach
           @endforeach
+        </div>
           @if(auth()->user())
-            <button disabled="primary"><a href="{{'addmovie/'. $movie->id}}">Add to watchlist</a></button>
+            <button class="btn-wishlist" disabled="primary"><a href="{{'addmovie/'. $movie->id}}">Add to wishlist</a></button>
           @endif
+        </div>
           </div>
-          
           @endforeach
-          
         </div>
 
-      <div class="movieposter">
-        <h3>Must Watch</h3>
-        <hr />
-        <div class="movie-trailer-grid">
-          <div class="trailer1">
-            <a href="#">
-                <img src="images/bg.jpg" />
-            </a>
-          </div>
-          <div class="trailer1">
-            <a href="#">
-                <img src="images/bg.jpg" />
-
-            </a>
-          </div>
-          <div class="trailer1">
-            <a href="#">
-                <img src="images/bg.jpg" />
-            </a>
-          </div>
-          <div class="trailer1 trailer-last">
-            <a href="#">
-                <img src="images/bg.jpg" />
-            </a>
-          </div>
-        </div>
-        <a href="#" class="viewall">View All</a>
-      </div>
 
       <div class="footer">
 		<div class="footer-navmeni">
