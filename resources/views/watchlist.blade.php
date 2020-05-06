@@ -19,9 +19,39 @@
   <body>
     <div class="wrapper-all">
       <div class="grey-background">
-       <div class="bgslide">
-        <h1 class="header-line">My Wishlist Movies</h1>
-       </div>
+        <div class="bgslide">
+          @if($popularMovie != null)
+          <img class="bgimage" src="{{'https://image.tmdb.org/t/p/original'.$popularMovie[0]->poster_path}}" alt="backgrouind">
+          <h1 class="header-line">{{$popularMovie[0]->title}}</h1>
+          <div class="filter-navbar">
+            @foreach ($popularMovieGenres[$popularMovie[0]->id] as $genre)
+              <a href="#">{{$genre}}</a>
+            @endforeach
+          </div>
+          <div class="button-navbar">
+            @if(count($videos)>0)
+            <button class="btn-watch-trailer" onclick="revealVideo('video','youtube')"><a href="https://www.youtube.com/embed/{{$videos[0]['key']}}" target="targetVideo">Watch Trailer</a></button>
+            @endif
+            <button class="btn-view-info"><a href="{{ route('movies.showMovie', $popularMovie[0]->id) }}">VIEW INFO</a></button>
+            <button class="btn-add-to-wishlist"><a href="{{'addmovie/'. $popularMovie[0]->id}}">+ ADD TO WISHLIST</a></button>
+          </div>
+          <div class="rating-card-wrapper">
+            <div class="rating-card">
+              <h3>
+                Rating
+                <span class="reviews-letter">based on 3.546 reviews</span>
+              </h3>
+              <div class="rating-stars">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star half-colored-star"></span>
+                <span class="fa fa-star"></span>
+              </div>
+            </div>
+          </div>
+          @endif
+      </div>
       <div class="movie-poster-wrapper">
         <div class="movie-categorisation">
           <a href="{{route('movies.index')}}" class="btn-movie-filter btn-rated">Now Playing</a>
@@ -82,6 +112,35 @@
 		  <p class="copyright">Designed by Milan Houter, All rights reserved.</p>
       </div>
     </div>
+
+    <div id="video" class="lightbox" onclick="hideVideo('video','youtube')">
+      <div class="lightbox-container">  
+        <div class="lightbox-content">
+          
+          <button onclick="hideVideo('video','youtube')" class="lightbox-close">
+            Close | ✕
+          </button>
+          <div class="video-container">
+            <iframe id="youtube" width="960" name="targetVideo" height="540" frameborder="0" allowfullscreen></iframe>
+          </div>      
+          
+        </div>
+      </div>
+    </div>
+    <script>
+      function revealVideo(div,video_id) {
+        var video = document.getElementById(video_id).src;
+        document.getElementById(video_id).src = video+'&autoplay=1'; 
+        document.getElementById(div).style.display = 'block';
+      }
+      
+      function hideVideo(div,video_id) {
+        var video = document.getElementById(video_id).src;
+        var cleaned = video.replace('&autoplay=1',''); 
+        document.getElementById(video_id).src = cleaned;
+        document.getElementById(div).style.display = 'none';
+      }
+          </script>
 
   </body>
 </html>
