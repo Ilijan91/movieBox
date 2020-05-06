@@ -84,7 +84,12 @@
     border-radius: 3px;
 	outline: none;
 }
-
+@media screen and (max-width: 450px){
+	.search-livewire-style[type=text]:focus{
+		width: 100px;
+		height: 70px;
+	}
+}
 @media screen and (max-width: 650px){
 	.btn-signin-signin{
 		width: 70px;

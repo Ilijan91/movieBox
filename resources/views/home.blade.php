@@ -6,6 +6,7 @@
 <html>
   <head>
     <title>MovieBox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
@@ -20,6 +21,7 @@
     <div class="wrapper">
       <div class="grey-background">
       <div class="bgslide">
+        <img class="bgslide" src="../images/bg.jpg" alt="backgrouind">
           @if($popularMovie != null)
           <img class="bgimage" src="{{'https://image.tmdb.org/t/p/original'.$popularMovie[0]->poster_path}}" alt="backgrouind">
           <h1 class="header-line">{{$popularMovie[0]->title}}</h1>
@@ -54,10 +56,10 @@
       </div>
       <div class="movie-poster-wrapper">
         <div class="movie-categorisation">
-          <a href="{{route('movies.index')}}" class="btn-movie-filter btn-rated">Now Playing</a>
-          <a href="{{route('movies.showTopRatedMovies')}}" class="btn-movie-filter btn-rated">Top Rated</a>
-          <a href="{{route('movies.showUpcomingMovies')}}" class="btn-movie-filter btn-rated">Upcoming</a>
-          <a href="{{route('movies.showPopularMovies')}}" class="btn-movie-filter btn-rated">Popular</a>
+        <button class="btn-movie-filter btn-rated"><a href="{{route('movies.index')}}" >Now Playing</a></button>
+          <button class="btn-movie-filter btn-rated"><a href="{{route('movies.showTopRatedMovies')}}" >Top Rated</a></button>
+            <button class="btn-movie-filter btn-rated"><a href="{{route('movies.showUpcomingMovies')}}" >Upcoming</a></button>
+              <button class="btn-movie-filter btn-rated"><a href="{{route('movies.showPopularMovies')}}">Popular</a></button>
           
           <div class="grid-list-icons">
             <span class="icon-view icon-list-1"><i class="fas fa-stream" onclick="testFunction()"></i></span>
@@ -72,6 +74,9 @@
               <span>{{\Carbon\Carbon::parse($movie->release_date)->format('d M, Y')  }}</span>
               <img src="{{'https://image.tmdb.org/t/p/original'. $movie->poster_path}}" alt="poster" class="poster-image">
             </div>
+            @if(auth()->user())
+            <button class="btn-wishlist" disabled="primary"><a href="{{'addmovie/'. $movie->id}}">Add to wishlist</a></button>
+          @endif
             <div class="card-trailer-bottom">
             <a href="{{ route('movies.showMovie', $movie->id) }}"><p class="movie-title">{{ mb_strimwidth($movie->title, 0, 19, "...") }}</p></a>
             <div class="movie-rating-wrapper">
@@ -82,9 +87,7 @@
             {{$genre}}
           @endforeach
         </div>
-          @if(auth()->user())
-            <button class="btn-wishlist" disabled="primary"><a href="{{'addmovie/'. $movie->id}}">Add to wishlist</a></button>
-          @endif
+        
         </div>
           </div>
           @endforeach
