@@ -375,6 +375,7 @@ body {
 }
 
 .bgslide {
+  z-index: 1;
   float: left;
   position: relative;
   border-bottom: 2px solid #ff0079;
@@ -404,6 +405,7 @@ body {
 }
 
 .bgimage {
+  z-index: 1;
   width: 100%;
   height: 100%;
   background-size: cover;
