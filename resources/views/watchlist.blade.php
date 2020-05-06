@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+ 
 <!DOCTYPE html>
 <html>
   <head>
@@ -25,22 +25,26 @@
         <hr />
         <div class="movie-trailer-grid">
           @foreach ($movies as $movie)
-          <div class="trailer1">
-            <a href="{{ route('movies.showMovie', $movie[0]->id) }}">{{ $movie[0]->title }}</a>
-              <img src="{{'https://image.tmdb.org/t/p/original'. $movie[0]->poster_path}}" alt="poster">
-            </a>
-            <div>
-              <span class="ml-1">{{ $movie[0]->rating }}</span>
-              <span class="mx-2">|</span>
-              <span>{{\Carbon\Carbon::parse($movie[0]->release_date)->format('d M, Y')  }}</span>
+          <div class="trailer-card">
+            <div class="movie-date-wrapper">
+              <span>{{\Carbon\Carbon::parse($movie->release_date)->format('Y')}}</span>
+              <img src="{{'https://image.tmdb.org/t/p/original'. $movie->poster_path}}" alt="poster" class="poster-image">
+            </div>
+            <div class="card-trailer-bottom">
+              <a href="{{ route('movies.showMovie', $movie->id) }}"><p class="movie-title">{{ $movie->title }} </p></a>
+
+            <div class="movie-rating-wrapper">
+              <span class="ml-1"><span class="movie-rating">{{ $movie->rating }}</span> </span>
           </div>
-          @foreach (explode(',',$movie[0]->genre_id) as $genre )
-            @foreach ($moviesgenres as $g)
-              @if($g->id== $genre)
-                {{$g->name}}|
-              @endif
+          <div class="genre-wrapper">
+            @foreach (explode(',',$movie->genre_id) as $genre)
+              @foreach ($moviesgenres as $g)
+                @if($g->id== $genre)
+                  <span class="movie-genre">{{$g->name}}</span>
+                @endif
+              @endforeach
             @endforeach
-          @endforeach
+          </div>
           @if(auth()->user())
             <form action="{{ route('watchlist.destroy', $movie[0]->id) }}" method="POST">
               {{ method_field('DELETE') }}
@@ -49,12 +53,9 @@
             </form>
           @endif
           </div>
-          
+          </div>
           @endforeach
-          
         </div>
-
-
       <div class="footer">
 		<div class="footer-navmeni">
 			<p class="nav-items">Contact</p>

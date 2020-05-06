@@ -1,4 +1,4 @@
-@mixin responsive($breakpoint){
+@mixin responsive($breakpoint){ 
     @if $breakpoint == laptop {
         @media only screen and (max-width: 1366px) { @content }; //1
     }

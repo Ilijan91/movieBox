@@ -1,0 +1,47 @@
+.navbar{
+    background: rgba(51, 255, 0, 0.13);
+}
+.btn-signin-signin { 
+	background-color: $pure-white;
+	width: 170px;
+	height: 60px;
+	border-radius: 3px;
+	color: $pure-white;
+	font-size: 20px;
+	border: none;
+	margin-right: 20px;
+  }
+  .btn-login-login {
+	background-color: rgba(230, 0, 161, 0);
+	width: 100px;
+	height: 60px;
+	color: $pure-white;
+	font-size: 20px;
+	border: none;
+  }
+  .fa-search {
+	font-size: 30px;
+	color: $pure-white;
+	font-weight: 200;
+  }
+@media screen and (max-width: 650px){
+	.btn-signin-signin{
+		width: 70px;
+		height: 30px;
+		font-size: 15px;
+	}
+	.btn-login-login{
+		width: 70px;
+		height: 30px;
+		font-size: 15px;
+	}
+}
+@media screen and (max-width: 650px){
+	.logo-box h1{
+		font-size: 20px;
+	}
+	.menu-nav ul li{
+		padding: 0 10px;
+	}
+}
+
