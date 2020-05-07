@@ -20,12 +20,11 @@
         <a href="#"> <img src="{{'https://image.tmdb.org/t/p/w200/'. $movie->poster_path}}" alt="poster" class="cover"></a>
          <div class="movie-cover">
           <div id="headerPopup" class="video-overlay">
-        <a href="#"> <img src="{{'https://image.tmdb.org/t/p/w200/'. $movie->poster_path}}" alt="poster" class="cover"></a>
+        <a href="#"> <img src="{{'https://image.tmdb.org/t/p/w200/'. $movie->poster_path}}" alt="poster" class="cover-2"></a>
 
         <div id="container">
             <div class="title-1">{{$movie->title}}</div>
       
-           <p>Open the Movie Trailer with below button</p>
            @if(count($videos)>0)
             <button class="btn-watch-trailer" onclick="revealVideo('video','youtube')"><a href="https://www.youtube.com/embed/{{$videos[0]['key']}}" target="targetVideo">Watch Trailer</a></button>
             @endif
@@ -47,6 +46,7 @@
         </div>
           </div>
          </div> 
+         <div class="details-wrapper">
          <div class="description">
             <div class="column-1">
               @foreach ($moviesgenres[$movie->id] as $genre)
@@ -63,12 +63,13 @@
         <div class="more-images-movie">
           @foreach ($images['backdrops'] as $image)
           @if($loop->index < 9)
-            <a href="#"> <img src="{{'https://image.tmdb.org/t/p/w500/'. $image['file_path']}}" alt="poster" class="movie-poster-1"></a> 
+            <a href="#"> <img src="{{'https://image.tmdb.org/t/p/w500/'. $image['file_path']}}" alt="poster" class="movie-poster-1 poster-focus"></a> 
           @endif   
           @endforeach
         </div>
           
        </div> 
+      </div>
      </div> 
      </div>
 
