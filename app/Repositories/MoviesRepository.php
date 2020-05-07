@@ -9,10 +9,10 @@ use App\Repositories\MoviesRepositoryInterface;
 
 class MoviesRepository implements MoviesRepositoryInterface
 {
-    public function getAllMovies(){
+    public function filterMovies(){
        
 
-            $movies = new Movie ();
+            $movies = Movie::select();
             if(request()->has('rating')){
                 $movies= $movies->where('rating','LIKE','%'.request('rating').'%')
                                 ->orderBy('rating','asc');
@@ -20,23 +20,25 @@ class MoviesRepository implements MoviesRepositoryInterface
             if(request()->has('release_date')){
                 $movies= $movies->where('release_date','LIKE','%'.request('release_date').'%')
                                 ->orderBy('release_date','asc');
+                
             }
-            if(request()->has('title')){
-                $movies= $movies->where('title','LIKE','%'.request('title').'%')
-                                ->orderBy('title','asc');
-            }
+            
             if(request()->has('genre')){
                 $movies= $movies->where('genre_id','LIKE','%'.request('genre').'%')
                                 ->orderBy('genre_id','asc');
             }
+         
+           
+                return $movies->paginate(8)->appends([
+                                    'rating'=>request('rating'),
+                                    'release_date'=>request('release_date'),
+                                    'genre'=>request('genre'),
+                            ]);
+        
+    }
 
-           return $movies->paginate(8)->appends([
-                'rating'=>request('rating'),
-                'release_date'=>request('release_date'),
-                'title'=>request('title'),
-                'genre'=>request('genre'),
-           ]);
-            
+    public function getAllMovies(){
+        return Movie::paginate(8);
     }
     public function getPopular(){
         return Movie::select()->where('flag','LIKE','%is_popular%');

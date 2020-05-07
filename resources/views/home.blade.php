@@ -73,36 +73,33 @@
         <hr />
         
         <div class="form-filter-inline">
-          <form action="{{ route('movies.index')}}">
+          <form action="{{ route('movies.filter')}}">
           {{-- Rating --}}
-  
-              <label for="rating"></label>
-              <input class="filter-rating" placeholder="Ratings" type="text" id="rating" name="rating">
+
+          <label for="rating"></label>
+          <input class="filter-rating" id="rating" name="rating" type="number" min="1" max="10" value="1">
   
           {{-- Date --}}
-  
-            <label for="release_date"></label>
-            <input placeholder="Year" type="text" id="release_date" name="release_date">
 
-         {{-- Title --}}
-  
-          <label  for="title"></label>
-          <input  placeholder="Title" type="text" id="title" name="title">
-
+          <label for="release_date"></label>
+          <select class="genre-options" id="release_date" name="release_date" id="year"></select>
+          
           {{-- Genre --}}
+
             <label for="genre"></label>
               <select class="genre-options" name="genre" id="genre">
                 @foreach ($genres as $genre)
                   <option value="{{$genre['id']}}">{{$genre['name']}}</option>
                 @endforeach
               </select>
-  
               <button type="submit" name="Filter" value="Filter" class="button btn-success"> FILTER</button>
-  
         </form>
         </div>
         <div class="movie-trailer-grid js-all-movies">
         {{-- <div class="movie-trailer-grid js-all-movies"> --}}
+          @if($movies->total() == 0)
+            <h1>No movies of this criteria</h1>
+          @else
           @foreach ($movies as $movie)
           <div class="trailer-card">
             <div class="movie-date-wrapper">
@@ -126,11 +123,13 @@
         </div>
           </div>
           @endforeach
+       @endif
           
         {{-- </div> --}}
       </div>
+      
      <div class="home-page-pagination">{!! $movies->links() !!}</div>
-
+     
       </div>
       <div class="footer">
 		<div class="footer-navmeni">
@@ -159,6 +158,15 @@
       </div>
     </div>
     <script>
+
+// Count for year start from 1900 to 2020
+var start = 1900;
+var end = new Date().getFullYear();
+var options = "";
+for(var year = start ; year <=end; year++){
+  options += "<option>"+ year +"</option>";
+}
+document.getElementById("release_date").innerHTML = options;
 
     // list and grid view
 

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="login-box">
-                <div class="card-header">{{ __('Register') }}</div>
+                <h1>{{ __('Register') }}</h1>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -41,9 +41,9 @@
                         </div>
 
                         <div class="user-box">
-                                <a type="submit" class="btn btn-primary">
+                            <button type="submit"><a>
                                     {{ __('Register') }}
-                                </a>
+                            </a></button>
                         </div>
                     </form>
                 </div>

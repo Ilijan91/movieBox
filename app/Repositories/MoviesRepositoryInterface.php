@@ -5,6 +5,8 @@ namespace App\Repositories;
 
 interface MoviesRepositoryInterface
 {
+   public function filterMovies();
+
    public function getAllMovies();
 
     public function getPopular();

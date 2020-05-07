@@ -26,7 +26,9 @@ class WatchlistsController extends Controller
     {
         // User can see wathclist only if he is authorized
         $user=User::findOrFail($user_id);
-        if($user->watchlist != null){
+        
+
+        if($user->watchlist != null || $user->id != auth()->user()->id){
             $this->authorize('view',$user->watchlist);
         }
         $movies=$this->watchlistService->get($user_id); 

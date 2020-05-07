@@ -109,7 +109,7 @@
 			<p class="nav-items-2">About</p>
 		  </div>
     <h2 class="footer-logo-title-2">THEMOVIEBOX</h2>
-		  <p class="copyright">Designed by Milan Houter, All rights reserved.</p>
+    <p class="copyright">Powerd by <a href="https://www.themoviedb.org/documentation/api">TMDb API</a></p>
       </div>
     </div>
 
