@@ -3,7 +3,7 @@
     @if(strlen($search) >= 2)
         <div class="absolute bg-white-800 text-sm">
             @if ($searchResult->count()>0)
-            <ul>
+            <ul class="movie-search-list">
                 @foreach ($searchResult as $result)
                     <li class="border-b border-white-700">
                         <a class="block hover:bg-white-700 transition ease-in-out duration-150" href="{{route('movies.showMovie', $result['id'])}}">
