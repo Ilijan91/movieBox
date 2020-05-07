@@ -17,7 +17,7 @@ class CreateMoviesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('poster_path')->nullable();
-            $table->integer('rating');
+            $table->float('rating');
             $table->text('overview');
             $table->date('release_date');
             $table->string('genre_id');

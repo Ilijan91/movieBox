@@ -376,12 +376,6 @@ body {
 }
 
 .bgslide {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 920px;
-  min-height: 650px;
   float: left;
   position: relative;
   border-bottom: 2px solid #ff0079;
@@ -449,10 +443,11 @@ body {
     bottom: 400px;
     margin: 0;
   }
+}
+
 .bgimage {
-  z-index: 1;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -12009,3 +12004,4 @@ body {
 .card-grid-wrapper {
   width: 90%;
 }
+
