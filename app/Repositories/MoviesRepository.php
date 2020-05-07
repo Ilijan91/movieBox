@@ -4,35 +4,54 @@ namespace App\Repositories;
 
 use App\Movie;
 
-
-// use Illuminate\Database\Eloquent\Model;
 use App\Repositories\MoviesRepositoryInterface;
 
 
 class MoviesRepository implements MoviesRepositoryInterface
 {
-    // protected $movie;
-    
-    
-    // public function __construct(Model $movie)
-    // {
-    //     $this->movie = $movie;
-    // }
-    
+    public function getAllMovies(){
+       
+
+            $movies = new Movie ();
+            if(request()->has('rating')){
+                $movies= $movies->where('rating','LIKE','%'.request('rating').'%')
+                                ->orderBy('rating','asc');
+            }
+            if(request()->has('release_date')){
+                $movies= $movies->where('release_date','LIKE','%'.request('release_date').'%')
+                                ->orderBy('release_date','asc');
+            }
+            if(request()->has('title')){
+                $movies= $movies->where('title','LIKE','%'.request('title').'%')
+                                ->orderBy('title','asc');
+            }
+            if(request()->has('genre')){
+                $movies= $movies->where('genre_id','LIKE','%'.request('genre').'%')
+                                ->orderBy('genre_id','asc');
+            }
+
+           return $movies->paginate(8)->appends([
+                'rating'=>request('rating'),
+                'release_date'=>request('release_date'),
+                'title'=>request('title'),
+                'genre'=>request('genre'),
+           ]);
+            
+    }
     public function getPopular(){
-        return Movie::select()->where('flag','LIKE','%is_popular%')->get();
+        return Movie::select()->where('flag','LIKE','%is_popular%');
     }
 
     public function getTopRated(){
-        return Movie::select()->where('flag','LIKE','%is_top_rated%')->get();
+        return Movie::select()->where('flag','LIKE','%is_top_rated%');
     }
 
     public function getNowPlaying(){
-        return Movie::select()->where('flag','LIKE','%is_now_playing%')->get();
+        return Movie::select()->where('flag','LIKE','%is_now_playing%');
     }
 
     public function getUpcoming(){
-        return Movie::select()->where('flag','LIKE','%is_upcoming%')->get();
+        return Movie::select()->where('flag','LIKE','%is_upcoming%');
     }
 
     public function find($id){
