@@ -96,4 +96,3 @@ function hideVideo(div,video_id) {
 @endsection 
 
 
-

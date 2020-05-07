@@ -11907,7 +11907,7 @@ label {
   font-size: 12px;
 }
 
-.login-box form a {
+.login-box form button {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
@@ -11921,19 +11921,19 @@ label {
   letter-spacing: 4px;
 }
 
-.login-box form a:hover {
+.login-box form button:hover {
   background: #ff0079;
   color: #f1eee6;
   border-radius: 5px;
   box-shadow: 0 0 5px #03e9f4, 0 0 25px #ff0079, 0 0 50px #ff0079, 0 0 100px #ff0079;
 }
 
-.login-box a span {
+.login-box button span {
   position: absolute;
   display: block;
 }
 
-.login-box a span:nth-child(1) {
+.login-box button span:nth-child(1) {
   top: 0;
   left: -100%;
   width: 100%;
@@ -11948,7 +11948,7 @@ label {
   height: 50px;
 }
 
-.btn-link a {
+.btn-link button {
   font-size: 8px;
 }
 
