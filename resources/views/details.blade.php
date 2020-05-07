@@ -67,10 +67,11 @@
           @endif   
           @endforeach
         </div>
-          
+        <p class="copyright">Powerd by <a href="https://www.themoviedb.org/documentation/api">TMDb API</a></p>
        </div> 
       </div>
      </div> 
+   
      </div>
 
      

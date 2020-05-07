@@ -539,7 +539,7 @@
   .bgslide .filter-navbar {
     display: flex;
     flex-direction: row;
-    font-size: 17px;
+    font-size: 13px;
     bottom: 400px;
     margin: 0;
   }
@@ -807,6 +807,53 @@
 
 .grey-background {
   background: #f8f8f8;
+  margin-top: -100px;
+}
+
+.form-filter-inlinee {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.form-filter-inline label {
+  margin: 5px 10px 5px 0;
+}
+
+.form-filter-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.form-filter-inline button {
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+}
+
+.form-filter-inline button:hover {
+  background-color: royalblue;
+}
+
+@media (max-width: 800px) {
+  .form-filter-inline input {
+    margin: 10px 0;
+  }
+
+  .form-filter-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.genre-options {
+  width: 120px;
+  height: 40px;
 }
 
 @media only screen and (max-width: 1366px) {
@@ -948,6 +995,19 @@
 
   .trailer-card {
     width: 100%;
+  }
+
+  .pagination {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 40px;
+  }
+
+  .pagination a {
+    width: 50px;
   }
 }
 

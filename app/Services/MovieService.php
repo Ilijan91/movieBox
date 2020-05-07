@@ -22,6 +22,10 @@ class MovieService
     public function getAll(){
         return $this->moviesRepository->getAllMovies();
     }
+    // Method for filter movies from database
+    public function filter(){
+        return $this->moviesRepository->filterMovies();
+    }
     // Method to get popular movies from database
     public function getPopularMovies(){
 

@@ -71,42 +71,37 @@
           </div>
 		</div>
         <hr />
-        <div class="movie-trailer-grid js-all-movies" >
-
-        <div class="filter">
-          Filter:
-          <form action="{{ route('movies.index')}}">
+        
+        <div class="form-filter-inline">
+          <form action="{{ route('movies.filter')}}">
           {{-- Rating --}}
-          <fieldset class="form-group">
-              <label class="col-sm-2 control-label" for="rating">Ratings</label>
-              <input class="form-control" type="text" id="rating" name="rating">
-          </fieldset>
+
+          <label for="rating"></label>
+          <input class="filter-rating" id="rating" name="rating" type="number" min="1" max="10" value="1">
+  
           {{-- Date --}}
-          <fieldset class="form-group">
-            <label class="col-sm-2 control-label" for="release_date">Year</label>
-            <input class="form-control" type="text" id="release_date" name="release_date">
-        </fieldset>
-         {{-- Title --}}
-         <fieldset class="form-group">
-          <label class="col-sm-2 control-label" for="title">Title</label>
-          <input class="form-control" type="text" id="title" name="title">
-         </fieldset>
+
+          <label for="release_date"></label>
+          <select class="genre-options" id="release_date" name="release_date" id="year"></select>
+          
           {{-- Genre --}}
-            <label for="genre">Choose a genre:</label>
-              <select name="genre" id="genre">
+
+            <label for="genre"></label>
+              <select class="genre-options" name="genre" id="genre">
                 @foreach ($genres as $genre)
                   <option value="{{$genre['id']}}">{{$genre['name']}}</option>
                 @endforeach
               </select>
-          <fieldset>
-              <input type="submit" name="Filter" value="Filter" class="button btn-success"> 
-          </fieldset>
+              <button type="submit" name="Filter" value="Filter" class="button btn-success"> FILTER</button>
         </form>
         </div>
-
-        <div class="movie-trailer-grid" id="column1">
+        <div class="movie-trailer-grid js-all-movies">
+        {{-- <div class="movie-trailer-grid js-all-movies"> --}}
+          @if($movies->total() == 0)
+            <h1>No movies of this criteria</h1>
+          @else
           @foreach ($movies as $movie)
-          <div class="trailer-card js-trailer-card">
+          <div class="trailer-card">
             <div class="movie-date-wrapper">
               <span>{{\Carbon\Carbon::parse($movie->release_date)->format('Y')}}</span>
               <img src="{{'https://image.tmdb.org/t/p/original'. $movie->poster_path}}" alt="poster" class="poster-image">
@@ -128,9 +123,13 @@
         </div>
           </div>
           @endforeach
-          {!! $movies->links() !!}
-        </div>
+       @endif
+          
+        {{-- </div> --}}
       </div>
+      
+     <div class="home-page-pagination">{!! $movies->links() !!}</div>
+     
       </div>
       <div class="footer">
 		<div class="footer-navmeni">
@@ -159,6 +158,15 @@
       </div>
     </div>
     <script>
+
+// Count for year start from 1900 to 2020
+var start = 1900;
+var end = new Date().getFullYear();
+var options = "";
+for(var year = start ; year <=end; year++){
+  options += "<option>"+ year +"</option>";
+}
+document.getElementById("release_date").innerHTML = options;
 
     // list and grid view
 
