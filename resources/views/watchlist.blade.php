@@ -41,13 +41,8 @@
                 Rating
                 <span class="reviews-letter">based on 3.546 reviews</span>
               </h3>
-              <div class="rating-stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star half-colored-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
+              <p class="rating-number">{{ $popularMovie[0]->rating }}</p>
+
             </div>
           </div>
           @endif
@@ -75,25 +70,16 @@
               <img src="{{'https://image.tmdb.org/t/p/original'. $movie[0]->poster_path}}"alt="poster" class="poster-image">
             </div>
             <div class="card-trailer-bottom">
-              <a href="{{ route('movies.showMovie', $movie[0]->id) }}"><p class="movie-title">{{ $movie[0]->title }}</p></a>
+              <a href="{{ route('movies.showMovie', $movie[0]->id) }}"><p class="movie-title">{{ mb_strimwidth($movie[0]->title, 0, 19, "...") }}</p></a>
             <div class="movie-rating-wrapper">
               <span class="ml-1"><span class="movie-rating">{{ $movie[0]->rating }}</span> </span>
-        </div>
-        <div class="genre-wrapper">
-          @foreach (explode(',',$movie[0]->genre_id) as $genre )
-            @foreach ($moviesgenres as $g)
-              @if($g->id== $genre)
-                <span class="movie-genre">{{$g->name}}</span>
-              @endif
-            @endforeach
-          @endforeach
         </div>
             </div>
           @if(auth()->user())
             <form action="{{ route('watchlist.destroy', $movie[0]->id) }}" method="POST">
               {{ method_field('DELETE') }}
               {{ csrf_field() }}
-              <button class="btn btn-danger">Remove Movie</button>
+              <button class="btn btn-wishlist">Remove Movie</button>
             </form>
           @endif
           </div>

@@ -1,15 +1,11 @@
 @import "~bootstrap/scss/bootstrap";
 
-.card {
-    width: 100%;
-}
+
 html {
     height: 100%;
 }
 
 body {
-    mergin: 0;
-    padding: 0;
     font-family: "Arial", sans-serif;
     background: linear-gradient(#141e30, #243b55);
 }
@@ -43,7 +39,6 @@ label{
 .login-box .user-box input {
     width: 100%;
     padding: 10px 0;
-    font-size: 16px;
     color: #f1eee6;
     margin-bottom: 10px;
     border: none;
@@ -68,10 +63,9 @@ label{
     top: -32px;
     left: 0px;
     color: $pink;
-    font-size: 12px;
 }
 
-.login-box form a {
+.login-box form button {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
@@ -83,14 +77,14 @@ label{
     transition: 0.5s;
     margin-top: 40px;
     letter-spacing: 4px;
+    &:hover{
+        background: $pink;
+        color: #f1eee6;
+        border-radius: 5px;
+        box-shadow: 0 0 5px #03e9f4, 0 0 25px $pink, 0 0 50px $pink, 0 0 100px $pink;
+    }
 }
 
-.login-box form a:hover {
-    background: $pink;
-    color: #f1eee6;
-    border-radius: 5px;
-    box-shadow: 0 0 5px #03e9f4, 0 0 25px $pink, 0 0 50px $pink, 0 0 100px $pink;
-}
 
 .login-box a span {
     position: absolute;
@@ -108,9 +102,14 @@ label{
 .btn-link {
     width: 100px;
     height: 50px;
+    margin-top: 38px;
     a{
         font-size: 8px;
+        color: $pure-white;
     }
+}
+.form-check-input{
+    margin-left: 20px;
 }
 
 @keyframes btn-anim1 {

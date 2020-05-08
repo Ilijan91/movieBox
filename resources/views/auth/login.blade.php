@@ -30,7 +30,7 @@
             </label>
         </div>
         <div class="user-box">
-            <button type="submit">
+            <button class="btn btn-link" type="submit">
                 {{ __('Login') }}
             </button>
 

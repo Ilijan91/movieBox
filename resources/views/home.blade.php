@@ -30,7 +30,7 @@
           <h1 class="header-line">{{$popularMovie[0]->title}}</h1>
           <div class="filter-navbar">
             @foreach ($popularMovieGenres[$popularMovie[0]->id] as $genre)
-              <a href="#">{{$genre}}</a>
+              <p>{{$genre}}</p>
             @endforeach
           </div>
           <div class="button-navbar">
@@ -47,11 +47,7 @@
                 <span class="reviews-letter">based on 3.546 reviews</span>
               </h3>
               <div class="rating-stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star half-colored-star"></span>
-                <span class="fa fa-star"></span>
+                <p class="rating-number">{{ $popularMovie[0]->rating }}</p>
               </div>
             </div>
           </div>
@@ -101,6 +97,7 @@
             <h1>No movies of this criteria</h1>
           @else
           @foreach ($movies as $movie)
+          <a href="{{ route('movies.showMovie', $movie->id) }}">
           <div class="trailer-card">
             <div class="movie-date-wrapper">
               <span>{{\Carbon\Carbon::parse($movie->release_date)->format('Y')}}</span>
@@ -122,6 +119,7 @@
         
         </div>
           </div>
+        </a>
           @endforeach
        @endif
           

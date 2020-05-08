@@ -47,11 +47,12 @@
         .movie-rating-wrapper {
             float: right;
             border: 2px solid $pink;
-            width: 55px;
-            height: 40px;
+            width: 47px;
+            height: 36px;
             justify-content: center;
             margin-top: -30px;
             border-radius: 6px;
+            margin-right: -10px;
             .movie-rating {
                 text-align: center;
                 font-size: 20px;
@@ -139,8 +140,7 @@
         display: flex;
         margin-left: 130px;
         font-size: 22px;
-
-        a {
+        p {
             @include a-links;
             padding: 14px 20px;
             text-align: center;
@@ -326,12 +326,17 @@
 }
 .rating-stars {
     display: flex;
+    justify-content: center;
 }
 .fa-star {
     font-size: 30px;
     letter-spacing: 13px;
     color: $pink;
     padding-top: 15px;
+}
+.rating-number{
+    font-size: 20px;
+    justify-content: center;
 }
 .card h3 {
     font-size: 20px;
