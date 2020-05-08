@@ -70,6 +70,7 @@
         </div>
     </div>
 </div> --}}
+<div class="login-wrapper">
 <div class="login-box">
 	<h2>{{ __('Login') }}</h2>
     <form method="POST" action="{{ route('login') }}">
@@ -107,6 +108,6 @@
     @endif
 	</form>
 </div>
-
+</div>
 @endsection
 

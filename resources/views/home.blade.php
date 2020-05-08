@@ -71,42 +71,40 @@
           </div>
 		</div>
         <hr />
-        <div class="movie-trailer-grid js-all-movies" >
-
-        <div class="filter">
-          Filter:
+        
+        <div class="form-filter-inline">
           <form action="{{ route('movies.index')}}">
           {{-- Rating --}}
-          <fieldset class="form-group">
-              <label class="col-sm-2 control-label" for="rating">Ratings</label>
-              <input class="form-control" type="text" id="rating" name="rating">
-          </fieldset>
+  
+              <label for="rating"></label>
+              <input class="filter-rating" placeholder="Ratings" type="text" id="rating" name="rating">
+  
           {{-- Date --}}
-          <fieldset class="form-group">
-            <label class="col-sm-2 control-label" for="release_date">Year</label>
-            <input class="form-control" type="text" id="release_date" name="release_date">
-        </fieldset>
+  
+            <label for="release_date"></label>
+            <input placeholder="Year" type="text" id="release_date" name="release_date">
+
          {{-- Title --}}
-         <fieldset class="form-group">
-          <label class="col-sm-2 control-label" for="title">Title</label>
-          <input class="form-control" type="text" id="title" name="title">
-         </fieldset>
+  
+          <label  for="title"></label>
+          <input  placeholder="Title" type="text" id="title" name="title">
+
           {{-- Genre --}}
-            <label for="genre">Choose a genre:</label>
-              <select name="genre" id="genre">
+            <label for="genre"></label>
+              <select class="genre-options" name="genre" id="genre">
                 @foreach ($genres as $genre)
                   <option value="{{$genre['id']}}">{{$genre['name']}}</option>
                 @endforeach
               </select>
-          <fieldset>
-              <input type="submit" name="Filter" value="Filter" class="button btn-success"> 
-          </fieldset>
+  
+              <button type="submit" name="Filter" value="Filter" class="button btn-success"> FILTER</button>
+  
         </form>
         </div>
-
-        <div class="movie-trailer-grid" id="column1">
+        <div class="movie-trailer-grid js-all-movies">
+        {{-- <div class="movie-trailer-grid js-all-movies"> --}}
           @foreach ($movies as $movie)
-          <div class="trailer-card js-trailer-card">
+          <div class="trailer-card">
             <div class="movie-date-wrapper">
               <span>{{\Carbon\Carbon::parse($movie->release_date)->format('Y')}}</span>
               <img src="{{'https://image.tmdb.org/t/p/original'. $movie->poster_path}}" alt="poster" class="poster-image">
@@ -128,9 +126,11 @@
         </div>
           </div>
           @endforeach
-          {!! $movies->links() !!}
-        </div>
+          
+        {{-- </div> --}}
       </div>
+     <div class="home-page-pagination">{!! $movies->links() !!}</div>
+
       </div>
       <div class="footer">
 		<div class="footer-navmeni">
