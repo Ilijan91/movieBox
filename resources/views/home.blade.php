@@ -25,7 +25,6 @@
     <div class="wrapper">
       <div class="grey-background">
       <div class="bgslide">
-        
           @if($popularMovie != null)
           <img class="bgimage" src="{{'https://image.tmdb.org/t/p/original'.$popularMovie[0]->poster_path}}" alt="backgrouind">
           <h1 class="header-line">{{$popularMovie[0]->title}}</h1>
@@ -60,7 +59,7 @@
       </div>
       <div class="movie-poster-wrapper">
         <div class="movie-categorisation">
-        <button class="btn-movie-filter btn-rated"><a href="{{route('movies.index')}}" >Now Playing</a></button>
+        <button class="btn-movie-filter btn-rated"><a href="{{route('movies.showNowPlayingMovies')}}" >Now Playing</a></button>
           <button class="btn-movie-filter btn-rated"><a href="{{route('movies.showTopRatedMovies')}}" >Top Rated</a></button>
             <button class="btn-movie-filter btn-rated"><a href="{{route('movies.showUpcomingMovies')}}" >Upcoming</a></button>
               <button class="btn-movie-filter btn-rated"><a href="{{route('movies.showPopularMovies')}}">Popular</a></button>
@@ -73,6 +72,39 @@
 		</div>
         <hr />
         <div class="movie-trailer-grid js-all-movies" >
+
+        <div class="filter">
+          Filter:
+          <form action="{{ route('movies.index')}}">
+          {{-- Rating --}}
+          <fieldset class="form-group">
+              <label class="col-sm-2 control-label" for="rating">Ratings</label>
+              <input class="form-control" type="text" id="rating" name="rating">
+          </fieldset>
+          {{-- Date --}}
+          <fieldset class="form-group">
+            <label class="col-sm-2 control-label" for="release_date">Year</label>
+            <input class="form-control" type="text" id="release_date" name="release_date">
+        </fieldset>
+         {{-- Title --}}
+         <fieldset class="form-group">
+          <label class="col-sm-2 control-label" for="title">Title</label>
+          <input class="form-control" type="text" id="title" name="title">
+         </fieldset>
+          {{-- Genre --}}
+            <label for="genre">Choose a genre:</label>
+              <select name="genre" id="genre">
+                @foreach ($genres as $genre)
+                  <option value="{{$genre['id']}}">{{$genre['name']}}</option>
+                @endforeach
+              </select>
+          <fieldset>
+              <input type="submit" name="Filter" value="Filter" class="button btn-success"> 
+          </fieldset>
+        </form>
+        </div>
+
+        <div class="movie-trailer-grid" id="column1">
           @foreach ($movies as $movie)
           <div class="trailer-card js-trailer-card">
             <div class="movie-date-wrapper">
@@ -96,6 +128,7 @@
         </div>
           </div>
           @endforeach
+          {!! $movies->links() !!}
         </div>
       </div>
       </div>

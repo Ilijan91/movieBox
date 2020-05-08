@@ -5,7 +5,8 @@ namespace App\Repositories;
 
 interface MoviesRepositoryInterface
 {
-   
+   public function getAllMovies();
+
     public function getPopular();
 
     public function getTopRated();

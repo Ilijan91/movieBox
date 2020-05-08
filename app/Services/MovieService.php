@@ -18,21 +18,27 @@ class MovieService
         $this->watchlistService = $watchlistService;
         $this->genreService= $genreService;
     }
+    //Method to get all movies from database
+    public function getAll(){
+        return $this->moviesRepository->getAllMovies();
+    }
     // Method to get popular movies from database
     public function getPopularMovies(){
-        return $this->moviesRepository->getPopular();
+
+         return $this->moviesRepository->getPopular()->paginate(8);
+         
     }
     // Method to get top rated movies from database
     public function getTopRatedMovies(){
-        return $this->moviesRepository->getTopRated();
+        return $this->moviesRepository->getTopRated()->paginate(8);
     }
     // Method to get now playing movies from database
     public function getNowPlayingMovies(){
-        return $this->moviesRepository->getNowPlaying();
+        return $this->moviesRepository->getNowPlaying()->paginate(8);
     }
     // Method to get upcoming movies from database
     public function getUpcomingMovies(){
-        return $this->moviesRepository->getUpcoming();
+        return $this->moviesRepository->getUpcoming()->paginate(8);
     }
     // Method to get movie by id from api
     public function findMovie($id){
