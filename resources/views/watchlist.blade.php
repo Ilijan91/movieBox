@@ -25,7 +25,7 @@
           <h1 class="header-line">{{$popularMovie[0]->title}}</h1>
           <div class="filter-navbar">
             @foreach ($popularMovieGenres[$popularMovie[0]->id] as $genre)
-              <a href="#">{{$genre}}</a>
+              <p href="#">{{$genre}}</p>
             @endforeach
           </div>
           <div class="button-navbar">
@@ -55,16 +55,17 @@
           <a href="{{route('movies.showPopularMovies')}}" class="btn-movie-filter btn-rated">Popular</a>
           
           <div class="grid-list-icons">
-            <span class="icon-view icon-list-1"><i class="fas fa-stream" onclick="testFunction()"></i></span>
-            <span class="icon-view icon-grid"><i class="fas fa-th-large" onclick="gridView()"></i></span>
+            <button class="icon-view icon-list-1"><i class="fas fa-stream" onclick="movieListView()"></i></button>
+            <button class="icon-view icon-grid"><i class="fas fa-th-large" onclick="movieGridView()"></i></button>
           </div>
 		</div>
         <hr />
-        <div class="movie-trailer-grid">
+        <div class="movie-trailer-grid js-all-movies">
           @if($movies==null)
             <h4>Watchlist is empty</h4>
           @else
           @foreach ($movies as $movie)
+          <a href="{{ route('movies.showMovie', $movie[0]->id) }}">
           <div class="trailer-card">
             <div class="movie-date-wrapper">
               <img src="{{'https://image.tmdb.org/t/p/original'. $movie[0]->poster_path}}"alt="poster" class="poster-image">
@@ -83,6 +84,7 @@
             </form>
           @endif
           </div>
+          </a>
           @endforeach
           @endif
         </div>
@@ -114,6 +116,30 @@
       </div>
     </div>
     <script>
+          // list and grid view
+
+var elements = document.getElementsByClassName("js-all-movies");
+var i;
+
+function movieListView() {
+  for (i = 0; i < elements.length; i++) {
+    elements[i].classList.add("js-acitive");
+    elements[i].classList.remove("js-acitive");
+    elements[i].style.flexFlow = "column";
+    elements[i].style.alignItems = "center";
+  }
+}
+
+function movieGridView() {
+  for (i = 0; i < elements.length; i++) {
+    elements[i].classList.add("js-acitive");
+    elements[i].classList.remove("js-acitive");
+    elements[i].style.flexFlow = "row wrap";
+    elements[i].style.alignItems = 'none';
+  }
+}
+
+
       function revealVideo(div,video_id) {
         var video = document.getElementById(video_id).src;
         document.getElementById(video_id).src = video+'&autoplay=1'; 
