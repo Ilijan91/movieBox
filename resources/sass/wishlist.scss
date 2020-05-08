@@ -1,22 +1,21 @@
-
-.wrapper-all{
+.wrapper-all {
     display: flex;
     flex-wrap: wrap;
 }
 
-.btn-wishlist{
+.btn-wishlist {
     width: 100%;
     background: #ff00ee;
-    color: white; 
+    color: white;
     height: 30px;
     border: none;
-    a{
-    color: white;
-    font-weight: 700;
-    text-decoration: none;
+    a {
+        color: white;
+        font-weight: 700;
+        text-decoration: none;
     }
 }
-.trailer-card-wishlist{
+.trailer-card-wishlist {
     @include trailer-card-all;
 }
 .footer-2 {
@@ -30,7 +29,6 @@
             font-size: 17px;
             width: auto;
             height: auto;
-            /* display: inline-block; */
             float: right;
             padding-right: 10px;
             margin-right: 40px;

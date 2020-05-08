@@ -12,7 +12,11 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
       rel="stylesheet"
     />
- 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script
+      src="https://kit.fontawesome.com/ee1ec2542e.js"
+      crossorigin="anonymous"
+    ></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -21,7 +25,7 @@
     <div class="wrapper">
       <div class="grey-background">
       <div class="bgslide">
-        <img class="bgslide" src="../images/bg.jpg" alt="backgrouind">
+        
           @if($popularMovie != null)
           <img class="bgimage" src="{{'https://image.tmdb.org/t/p/original'.$popularMovie[0]->poster_path}}" alt="backgrouind">
           <h1 class="header-line">{{$popularMovie[0]->title}}</h1>
@@ -62,16 +66,17 @@
               <button class="btn-movie-filter btn-rated"><a href="{{route('movies.showPopularMovies')}}">Popular</a></button>
           
           <div class="grid-list-icons">
-            <span class="icon-view icon-list-1"><i class="fas fa-stream" onclick="testFunction()"></i></span>
-            <span class="icon-view icon-grid"><i class="fas fa-th-large" onclick="gridView()"></i></span>
+            <button class="icon-view icon-list-1 active-nav" onclick="movieListView()"><i class="fas fa-stream"></i></button>
+            <button class="icon-view icon-grid" onclick="movieGridView()"><i class="fas fa-th-large"></i>
+            </button>
           </div>
 		</div>
         <hr />
-        <div class="movie-trailer-grid" id="column1">
+        <div class="movie-trailer-grid js-all-movies" >
           @foreach ($movies as $movie)
-          <div class="trailer-card">
+          <div class="trailer-card js-trailer-card">
             <div class="movie-date-wrapper">
-              <span>{{\Carbon\Carbon::parse($movie->release_date)->format('d M, Y')  }}</span>
+              <span>{{\Carbon\Carbon::parse($movie->release_date)->format('Y')}}</span>
               <img src="{{'https://image.tmdb.org/t/p/original'. $movie->poster_path}}" alt="poster" class="poster-image">
             </div>
             @if(auth()->user())
@@ -121,19 +126,45 @@
       </div>
     </div>
     <script>
-      function revealVideo(div,video_id) {
-        var video = document.getElementById(video_id).src;
-        document.getElementById(video_id).src = video+'&autoplay=1'; 
-        document.getElementById(div).style.display = 'block';
-      }
-      
-      function hideVideo(div,video_id) {
-        var video = document.getElementById(video_id).src;
-        var cleaned = video.replace('&autoplay=1',''); 
-        document.getElementById(video_id).src = cleaned;
-        document.getElementById(div).style.display = 'none';
-      }
-          </script>
+
+    // list and grid view
+
+var elements = document.getElementsByClassName("js-all-movies");
+var i;
+
+function movieListView() {
+  for (i = 0; i < elements.length; i++) {
+    elements[i].classList.add("js-acitive");
+    elements[i].classList.remove("js-acitive");
+    elements[i].style.flexFlow = "column";
+    elements[i].style.alignItems = "center";
+  }
+}
+
+function movieGridView() {
+  for (i = 0; i < elements.length; i++) {
+    elements[i].classList.add("js-acitive");
+    elements[i].classList.remove("js-acitive");
+    elements[i].style.flexFlow = "row wrap";
+    elements[i].style.alignItems = 'none';
+  }
+}
+
+    // video trailer js
+
+  function revealVideo(div,video_id) {
+  var video = document.getElementById(video_id).src;
+  document.getElementById(video_id).src = video+'&autoplay=1'; 
+  document.getElementById(div).style.display = 'block';
+  }
+
+  function hideVideo(div,video_id) {
+  var video = document.getElementById(video_id).src;
+  var cleaned = video.replace('&autoplay=1',''); 
+  document.getElementById(video_id).src = cleaned;
+  document.getElementById(div).style.display = 'none';
+  }
+    </script>
   </body>
 </html>
 
