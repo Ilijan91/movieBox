@@ -25,18 +25,20 @@ class HomeController extends Controller
 
     public function index()
     {
+        //Check first if there is any movie in database with pagination 
         $movies=$this->movieService->getAll(); 
         $moviesgenres=$this->movieService->getMoviesGenres($movies);
+        //If there is no movies in database use api to save movies and genres to app database
         if($movies->count() == 0 && empty($moviesgenres)){  
             $this->movieService->saveMovies();
             $this->genreService->saveGenres();
             $movies=$this->movieService->getAll();
             $moviesgenres=$this->movieService->getMoviesGenres($movies);
         }  
-           
-        
+        //Search for most popular movie in all users watchlists
         $popularMovie=$this->movieService->mostPopularMovie();
         $genres=$this->genreService->getGenres();
+        //If there is most poular movie use api to fatch his trailer/video and genres, else set it to null
         if($popularMovie->count()!= 0){
             
             $videos=$this->movieService->findVideo($popularMovie[0]->id);
@@ -52,6 +54,7 @@ class HomeController extends Controller
     }
 
     public function filter(){
+        // If user trigger filter search movies in database with selected options, search for movies in database
         $movies=$this->movieService->filter(); 
         $moviesgenres=$this->movieService->getMoviesGenres($movies);
         
@@ -72,7 +75,7 @@ class HomeController extends Controller
    
     public function showMovie($id)
     {
-        // Search first movie in database, if not found , search from API
+        // Search first movie by id in database, if not found , search from API
         $movie=$this->movieService->getMovie($id);
         if($movie== null){
             $movie=$this->movieService->findMovie($id);
@@ -88,6 +91,7 @@ class HomeController extends Controller
 
     public function showTopRatedMovies()
     {
+        //Fatch by flag for top rated movies in database with pagination 
         $movies=$this->movieService->getTopRatedMovies(); 
         $moviesgenres=$this->movieService->getMoviesGenres($movies);
         $popularMovie=$this->movieService->mostPopularMovie();
@@ -107,6 +111,7 @@ class HomeController extends Controller
 
     public function showUpcomingMovies()
     {
+        //Fatch by flag for upcoming movies in database with pagination 
         $movies=$this->movieService->getUpcomingMovies(); 
         $moviesgenres=$this->movieService->getMoviesGenres($movies);
         $popularMovie=$this->movieService->mostPopularMovie();
@@ -126,6 +131,7 @@ class HomeController extends Controller
 
     public function showPopularMovies()
     {
+        //Fatch by flag for popular movies in database with pagination 
         $movies=$this->movieService->getPopularMovies(); 
         $moviesgenres=$this->movieService->getMoviesGenres($movies);
         $popularMovie=$this->movieService->mostPopularMovie();
@@ -145,6 +151,7 @@ class HomeController extends Controller
 
     public function showNowPlayingMovies()
     {
+        //Fatch by flag for now playing movies in database with pagination 
         $movies=$this->movieService->getNowPlayingMovies(); 
         $moviesgenres=$this->movieService->getMoviesGenres($movies);
         $popularMovie=$this->movieService->mostPopularMovie();

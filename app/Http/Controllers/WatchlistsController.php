@@ -22,16 +22,15 @@ class WatchlistsController extends Controller
         $this->movieService = $movieService;
     }
    
-    public function index($user_id)
+    public function index()
     {
         // User can see wathclist only if he is authorized
-        $user=User::findOrFail($user_id);
+        $user=User::findOrFail(auth()->user()->id);
         
-
-        if($user->watchlist != null || $user->id != auth()->user()->id){
+        if($user->watchlist != null && auth()->user() == true){
             $this->authorize('view',$user->watchlist);
         }
-        $movies=$this->watchlistService->get($user_id); 
+        $movies=$this->watchlistService->get(auth()->user()->id); 
         $moviesgenres=$this->genreService->getGenres();
         $popularMovie=$this->movieService->mostPopularMovie();
     
@@ -47,15 +46,13 @@ class WatchlistsController extends Controller
         }
         return view('watchlist',compact('movies','moviesgenres','popularMovie','popularMovieGenres','videos'));
     }
-
-    
+    //Method to save movie to the watchlist from authorized user 
     public function store($movieId)
     {
         $this->watchlistService->saveMovie($movieId); 
         return redirect()->back();
     }
-
-   
+    //Method to delete movie to the watchlist from authorized user 
     public function destroy($movieId)
     {
         $this->watchlistService->deleteMovie($movieId); 
