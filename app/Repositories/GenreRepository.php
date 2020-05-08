@@ -7,7 +7,7 @@ use App\MovieGenre;
 
 class GenreRepository implements GenreRepositoryInterface
 {
-
+    //Save genres of movies
     public function save($genres){
         foreach($genres as $genre){
             MovieGenre::create([
@@ -17,7 +17,7 @@ class GenreRepository implements GenreRepositoryInterface
         }
     }
 
-
+    //Get all genre
     public function all(){
         return MovieGenre::all();
     }
